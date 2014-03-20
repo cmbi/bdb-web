@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>BDB Metadata</h2>
+
+{% if bdb_metadata %}
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Value</th>
+  </tr>
+{% for key, item in bdb_metadata.iteritems() %}
+  <tr>
+    <td>{{ key }}</td>
+    <td>{{ item }}</td>
+  </tr>
+{% endfor %}
+</table>
+{% else %}
+Not found
+{% endif %}
+
+<h2>Links</h2>
+
+{% if bdb_url %}
+  <span>BDB file:</span><a href="{{ bdb_url }}">download</a>
+{% else %}
+  <span>BDB file:</span>Does not exist
+{% endif %}
+
+<br/>
+
+{% if whynot_url %}
+  <span><a href="{{ whynot_url }}">WHY NOT</a></span>
+{% else %}
+  <span></span>
+{% endif %}
+
+{% endblock %}
