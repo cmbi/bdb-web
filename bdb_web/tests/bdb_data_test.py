@@ -35,11 +35,11 @@ def test_prepare_metadata():
     actual = prepare_metadata(dic=dic)
     eq_(actual, expected)
 
-@raises(TypeError)
+@raises(ValueError)
 def test_valid_pdb_id_float():
     valid_pdb_id(float(1))
 
-@raises(TypeError)
+@raises(ValueError)
 def test_valid_pdb_id_int():
     valid_pdb_id(int(1))
 
@@ -47,7 +47,7 @@ def test_valid_pdb_id_int():
 def test_valid_pdb_id_list():
     valid_pdb_id(list(1))
 
-@raises(TypeError)
+@raises(ValueError)
 def test_valid_pdb_id_none():
     valid_pdb_id(None)
 
