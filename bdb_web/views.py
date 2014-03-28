@@ -1,6 +1,7 @@
 from flask import render_template, send_from_directory
+from flask_flatpages import pygments_style_defs
 
-from bdb_web import app
+from bdb_web import app, flat_pages
 
 import bdb_data
 
@@ -30,11 +31,23 @@ def download(pdb_id):
             directory=bdb_data.bdb_dir(pdb_id),
             filename=pdb_id + ".bdb",
             mimetype="chemical/x-pdb",
+            as_attachment=True,
+            attachment_filename=pdb_id + ".bdb"
             )
 
-@app.route("/404")
-def error():
-    pass
+@app.route("/<name>/")
+def pages(name):
+    page = flat_pages.get_or_404(name)
+    return render_template("page.html", page=page)
 
-if __name__ == '__main__':
+@app.route("/pygments.css")
+def pygments_css():
+    return (pygments_style_defs("solarizedlight"), 200,
+            {"Content-Type": "text/css"})
+
+@app.errorhandler("404")
+def page_not_found(error):
+    return render_template("404.html"), 404
+
+if __name__ == "__main__":
     app.run()
