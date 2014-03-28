@@ -8,10 +8,6 @@ import bdb_data
 import logging
 _log = logging.getLogger("bdb")
 
-@app.route("/")
-def index():
-    return render_template("index.html")
-
 @app.route("/bdb/<pdb_id>")
 def bdb(pdb_id=None):
     if pdb_id is None:
@@ -35,6 +31,14 @@ def download(pdb_id):
             attachment_filename=pdb_id + ".bdb"
             )
 
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.errorhandler("404")
+def page_not_found(error):
+    return render_template("404.html"), 404
+
 @app.route("/<name>/")
 def pages(name):
     page = flat_pages.get_or_404(name)
@@ -45,9 +49,9 @@ def pygments_css():
     return (pygments_style_defs("solarizedlight"), 200,
             {"Content-Type": "text/css"})
 
-@app.errorhandler("404")
-def page_not_found(error):
-    return render_template("404.html"), 404
+@app.route("/search/")
+def search():
+    return render_template("search.html")
 
 if __name__ == "__main__":
     app.run()
