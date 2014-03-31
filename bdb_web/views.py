@@ -1,7 +1,7 @@
-from flask import render_template, send_from_directory
+from flask import g, redirect, render_template, send_from_directory, url_for
 from flask_flatpages import pygments_style_defs
 
-from bdb_web import app, flat_pages
+from bdb_web import app, flat_pages, forms
 
 import bdb_data
 
@@ -49,9 +49,15 @@ def pygments_css():
     return (pygments_style_defs("solarizedlight"), 200,
             {"Content-Type": "text/css"})
 
-@app.route("/search/")
+@app.route("/search", methods=("GET", "POST"))
 def search():
-    return render_template("search.html")
+    if not g.search_form.validate_on_submit():
+        return redirect("/")
+    return redirect(url_for("bdb", pdb_id=g.search_form.data["name"]))
+
+@app.before_request
+def before_request():
+    g.search_form = forms.SearchForm()
 
 if __name__ == "__main__":
     app.run()

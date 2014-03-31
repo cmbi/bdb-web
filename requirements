@@ -1,5 +1,6 @@
 flask>=0.10.1
 flask-flatpages>=0.5
+flask-wtf>=0.9.5
 gevent>=1.0
 gunicorn>=18.0
 mock>=1.0.1
