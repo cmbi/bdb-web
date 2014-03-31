@@ -38,24 +38,29 @@ def generate_bdb_url(pdb_id):
     pdb_id validation is performed by valid_pdb_id
     """
     bdb_url = None
-    if bdb_exists(pdb_id):
-        bdb_url = url_for("download", pdb_id=pdb_id)
+    try:
+        if bdb_exists(pdb_id):
+            bdb_url = url_for("download", pdb_id=pdb_id)
+    except (TypeError, ValueError) as e:
+        _log.error(e)
     return bdb_url
 
 def generate_whynot_url(pdb_id):
     """Return a url to the WHY NOT file for this pdb_id.
 
-    Return None if this WHY NOT file does not exist
+    Also return a url if the WHY NOT file does not exist locally. We let
+    the WHY NOT website figure out why there is no WHY NOT BDB file.
 
-    pdb_id validation is performed by valid_pdb_id
+    Return None if a WHY NOT url can somehow not be created.
     """
     whynot_url = None
-    pdb_id = valid_pdb_id(pdb_id)
-    if whynot_exists(pdb_id):
-        try:
-            whynot_url = app.config["WHY_NOT_SEARCH_URL"] + str(pdb_id)
-        except TypeError:
-            raise ValueError("PDB identifier should be a string")
+    try:
+#        pdb_id = valid_pdb_id(pdb_id)
+        whynot_url = app.config["WHY_NOT_SEARCH_URL"] + str(pdb_id)
+    except TypeError:
+        raise TypeError("PDB identifier should be a string")
+#    except ValueError as e:
+#        _log.error(e)
     return whynot_url
 
 def parse_bdb_metadata(pdb_id):
@@ -64,13 +69,15 @@ def parse_bdb_metadata(pdb_id):
     pdb_id validation is performed by valid_pdb_id
     """
     metadata = None
-    json_name = os.path.join(bdb_dir(pdb_id), pdb_id + ".json")
     try:
+        json_name = os.path.join(bdb_dir(pdb_id), pdb_id + ".json")
         with open(json_name, "r") as jf:
             metadata = json.load(jf)
             metadata = prepare_metadata(metadata)
     except IOError:
         _log.error("File " + json_name + " not found!")
+    except (TypeError, ValueError) as e:
+        _log.error(e)
     return metadata
 
 def prepare_metadata(dic):
