@@ -9,17 +9,51 @@
 <h2>BDB Metadata</h2>
 
 {% if bdb_metadata %}
+<h2>{{ bdb_metadata["pdb_id"] }}</h2>
+<br/>
+<h3>Refinement</h3>
+<h4>Software</h4>
+<table>
+  <tr><td>Found in PDB file</td><td>{{ bdb_metadata["refprog"] }}</td></tr>
+  <tr><td>Interpreted program(s)</td><td>{{ bdb_metadata["prog_inter"] }}</td></tr>
+  <tr><td>Interpreted program version(s)</td><td>{{ bdb_metadata["prog_vers"] }}</td></tr>
+  <tr><td>Interpreted last used program</td><td>{{ bdb_metadata["prog_last"] }}</td></tr>
+</table>
+<h4>TLS</h4>
+<table>
+  <tr><td>Groups found in PDB file</td><td>{{ bdb_metadata["tls_groups"] }}</td></tr>
+  <tr><td>B-factors probably residual</td><td>{{ bdb_metadata["tls_residual"] }}</td></tr>
+  <tr><td>B-factors probably sum of TLS and residual B-factors</td><td>{{
+      bdb_metadata["tls_sum"] }}</td></tr>
+  <tr>
+    <td>B-factor type according to PDB remediation</td>
+    <td>{{ bdb_metadata["b_type"] }}</td>
+  </tr>
+</table>
+<h4>Other B-factor info</h4>
+<table>
+  <tr><td>B-factor group type protein</td><td>{{ bdb_metadata["protein_b"] }}</td></tr>
+  <tr><td>C&alpha; only</td><td>{{ bdb_metadata["calpha_only"] }}</td></tr>
+  <tr><td>B-factor group type nucleic acid</td><td>{{ bdb_metadata["nucleic_b"] }}</td></tr>
+  <tr><td>B-factor field contains U<sup>2</sup> instead of 8&pi;<sup>2</sup>U<sup>2</sup></td><td>{{ bdb_metadata["correct_uij"] }}</td></tr>
+</table>
+<h4>ANISOU records</h4>
 <table>
   <tr>
-    <th>Key</th>
-    <th>Value</th>
-  </tr>
-{% for key, item in bdb_metadata.iteritems() %}
-  <tr>
-    <td>{{ key }}</td>
-    <td>{{ item }}</td>
-  </tr>
-{% endfor %}
+    <td>Present in PDB file</td>
+    <td>{{ bdb_metadata["has_anisou"] }}</td></tr>
+  <tr><td>B-factors reproducible from ANISOU records (%)</td><td>{{
+      bdb_metadata["beq_identical"] }}</td></tr>
+  <tr><td>Correct Uij</td><td>{{ bdb_metadata["correct_uij"] }}</td></tr>
+</table>
+<h4>Other refinement remarks</h4>
+<small>{{ bdb_metadata["other_refinement_remarks"] }}</small>
+</br>
+</br>
+<h3>PDB Entry Format</h3>
+<table>
+  <tr><td>Date</td><td>{{ bdb_metadata["format_date"] }}</td></tr>
+  <tr><td>Version</td><td>{{ bdb_metadata["format_vers"] }}</td></tr>
 </table>
 {% else %}
 Not found

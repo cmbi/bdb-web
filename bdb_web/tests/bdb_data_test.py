@@ -29,6 +29,18 @@ def test_parse_bdb_metadata(*args):
     actual = parse_bdb_metadata("1bar")
     eq_(actual, expected)
 
+@patch("bdb_web.bdb_data.bdb_dir", raises=TypeError)
+def test_parse_bdb_metadata(*args):
+    expected = None
+    actual = parse_bdb_metadata("1bar")
+    eq_(actual, expected)
+
+@patch("bdb_web.bdb_data.bdb_dir", raises=ValueError)
+def test_parse_bdb_metadata(*args):
+    expected = None
+    actual = parse_bdb_metadata("1bar")
+    eq_(actual, expected)
+
 def test_prepare_metadata():
     dic = {"ints": [1, 2, 3], "strs": ["a", "b", "c"], "none": None}
     expected = {"ints": "1, 2, 3", "strs": "a, b, c", "none": None}

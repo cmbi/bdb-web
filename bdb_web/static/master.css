@@ -130,6 +130,15 @@ strong {
   font-weight: bold;
 }
 
+sup {
+  font-size:small;
+  vertical-align:super;
+}
+
+small {
+   font-size:small;
+}
+
 /***** Header *****/
 
 header#main {
@@ -273,10 +282,6 @@ section#content {
 div.video iframe {
   width: 100%;
   height: 600px;
-}
-
-input[type=search] {
-  width: 115px;
 }
 
 /***** footer *****/
