@@ -1,4 +1,5 @@
 # Flask settings
-WHY_NOT_SEARCH_URL = "http://www.cmbi.ru.nl/WHY_NOT2/search/pdbid/"
+WHY_NOT_SEARCH_URL = "http://www.cmbi.ru.nl/WHY_NOT2/search?pdbid="
 BDB_ROOT = "bdb"
 DEBUG = True
+SECRET_KEY = "dummy secret key"
