@@ -28,17 +28,18 @@
               <input
                 type="image"
                 title="Search"
+                alt="Search"
                 src="{{ url_for('static', filename='icons/search_48x48.png') }}"
                 onsubmit="submit();"/>
             </form>
           </li>
           <li>
-            <a href="{{ url_for('pages', name='about') }}" title="About">
+            <a href="{{ url_for('pages', name='about') }}" title="About" alt="About">
               <img src="{{ url_for('static', filename='icons/about_48x48.png') }}"/>
             </a>
           </li>
           <li>
-            <a href="{{ url_for('pages', name='links') }}" title="External links">
+            <a href="{{ url_for('pages', name='links') }}" title="External links" alt="External links">
               <img src="{{ url_for('static', filename='icons/link_48x48.png') }}"/>
             </a>
           </li>

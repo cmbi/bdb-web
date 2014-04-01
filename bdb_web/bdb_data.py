@@ -84,10 +84,10 @@ def prepare_metadata(dic):
     """Collapse all values of this dictionary to strings."""
     for k, v in dic.iteritems():
         try:
-            v.sort()
-            v = ", ".join(str(x) for x in v)
-            dic[k] = v
-        except (AttributeError, TypeError):
+            if isinstance(v, (list, tuple)):
+                v = ", ".join(str(x) for x in v)
+                dic[k] = v
+        except (AssertionError, TypeError):
             pass
     return dic
 
