@@ -29,7 +29,7 @@ h3 {
 }
 
 a:link {
-  color: #C5B79C;
+  color: #6B7384;
   text-decoration: none;
 }
 
@@ -204,6 +204,12 @@ header#main nav h1 a:hover {
   text-decoration: none;
   text-transform: uppercase;
 }
+
+header#main nav ul li a img {
+  width: 48px;
+  height: 48px;
+}
+
 /***** Content *****/
 
 body section {
