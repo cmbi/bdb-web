@@ -8,6 +8,8 @@
           href="{{ url_for('static', filename='master.css') }}" />
     <link type="text/css" rel="stylesheet"
           href="{{ url_for('pygments_css') }}">
+    <!-- Otherwise IE loads into quirksmode for unkown reasons -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   </head>
   <body>
     <header id="main">
