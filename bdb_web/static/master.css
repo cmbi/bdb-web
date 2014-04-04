@@ -7,7 +7,7 @@ html {
 body {
   background: none repeat scroll 0 0 #EEEEEE;
   font-family: 'Helvetica';
-  font-size: 150%;
+  font-size: 100%;
   line-height: 1.5em;
   margin: 0 auto;
   max-width: 1024px;
@@ -50,9 +50,17 @@ a:hover {
 
 table {
   width: 100%;
-  border: 1px solid black;
+  border: 2px solid black;
   border-collapse: collapse;
   margin: 1em 0;
+}
+
+.column-1 {
+  width: 60%
+}
+
+.column-2 {
+  width: 40%
 }
 
 tbody {
@@ -133,6 +141,11 @@ strong {
 sup {
   font-size:small;
   vertical-align:super;
+}
+
+sub {
+  font-size:small;
+  vertical-align:sub;
 }
 
 small {
