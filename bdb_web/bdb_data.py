@@ -45,6 +45,23 @@ def generate_bdb_url(pdb_id):
         _log.error(e)
     return bdb_url
 
+def generate_pdb_url(pdb_id):
+    """Return a url to the PDB website for this pdb_id.
+
+    Also return a url if the pdb_id is nonsense. We let
+    the (RCSB) website figure out if the page exists.
+
+    Return None if a PDB url can somehow not be created.
+    """
+    pdb_url = None
+    try:
+        pdb_url = app.config["PDB_SEARCH_URL"] + str(pdb_id)
+    except TypeError:
+        raise TypeError("PDB identifier should be a string")
+#    except ValueError as e:
+#        _log.error(e)
+    return pdb_url
+
 def generate_whynot_url(pdb_id):
     """Return a url to the WHY NOT file for this pdb_id.
 

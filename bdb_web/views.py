@@ -14,15 +14,18 @@ def bdb(pdb_id=None):
         # TODO: Send json response to web page so it can display an error.
         pass
     else:
+        pdb_id = pdb_id.lower()
         return render_template(
                 "bdb.html",
                 bdb_metadata=bdb_data.parse_bdb_metadata(pdb_id),
                 bdb_url=bdb_data.generate_bdb_url(pdb_id),
+                pdb_url=bdb_data.generate_pdb_url(pdb_id),
                 whynot_url=bdb_data.generate_whynot_url(pdb_id)
                 )
 
 @app.route("/download/<pdb_id>")
 def download(pdb_id):
+    pdb_id = pdb_id.lower()
     return send_from_directory(
             directory=bdb_data.bdb_dir(pdb_id),
             filename=pdb_id + ".bdb",
