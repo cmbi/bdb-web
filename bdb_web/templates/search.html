@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {{ 'Search' }}
+{% endblock %}
+
+{% block content %}
+{% from "_formhelpers.html" import render_field_feedback %}
+<form method=get action="/search">
+  <dl>
+    {{ render_field_feedback(form.name) }}
+  </dl>
+  <p><input type=submit value=Search>
+</form>
+{% endblock %}
