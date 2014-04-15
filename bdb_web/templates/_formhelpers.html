@@ -1,6 +1,8 @@
 {% macro render_field(field) %}
-  <dd>{{ field(**kwargs)|safe }}</dd>
+  {{ field(size=15, results=5, placeholder="Enter a PDB code",
+        pattern="^[A-Za-z0-0]{4}$")|safe }}
 {% endmacro %}
+
 
 {% macro render_field_feedback(field) %}
   <dt>{{ field.label }}
