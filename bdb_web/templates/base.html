@@ -24,6 +24,7 @@
               action="/search"
               method="get"
               name="search">
+              {{ g.search_form.hidden_tag() }}
               {{ render_field(g.search_form.name) }}
               <input
                 type="image"
