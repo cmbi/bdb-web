@@ -18,16 +18,14 @@
         <h1><a href="/" title="BDB">BDB</a></h1>
         <ul>
           <li>
+            {% from "_formhelpers.html" import render_field %}
             <form
               style="display: inline;"
-              action="{{ url_for('search') }}"
-              method="post"
+              action="/search"
+              method="get"
               name="search">
               {{ g.search_form.hidden_tag() }}
-              {{ g.search_form.name(size=15,
-                                    results=5,
-                                    placeholder="Enter a PDB code",
-                                    pattern="^[A-Za-z0-9]{4}$") }}
+              {{ render_field(g.search_form.name) }}
               <input
                 type="image"
                 title="Search"
