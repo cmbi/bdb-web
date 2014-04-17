@@ -2,6 +2,7 @@
   {{ field(size=field.description["size"],
            results=field.description["results"],
            placeholder=field.description["placeholder"],
+           required=field.description["required"],
            pattern=field.description["pattern"].pattern) }}
 {% endmacro %}
 
@@ -11,6 +12,7 @@
   <dd>{{ field(size=field.description["size"],
                results=field.description["results"],
                placeholder=field.description["placeholder"],
+               required=field.description["required"],
                pattern=field.description["pattern"].pattern) }}
   {% if field.errors %}
     <ul class=errors>
