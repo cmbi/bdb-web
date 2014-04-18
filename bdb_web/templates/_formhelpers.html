@@ -1,5 +1,6 @@
 {% macro render_field(field) %}
-  {{ field(size=field.description["size"],
+  {{ field(title=field.description["title"],
+           size=field.description["size"],
            results=field.description["results"],
            placeholder=field.description["placeholder"],
            required=field.description["required"],
@@ -9,7 +10,8 @@
 
 {% macro render_field_feedback(field) %}
   <dt>{{ field.label }}
-  <dd>{{ field(size=field.description["size"],
+  <dd>{{ field(title=field.description["title"],
+               size=field.description["size"],
                results=field.description["results"],
                placeholder=field.description["placeholder"],
                required=field.description["required"],
