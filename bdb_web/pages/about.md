@@ -4,10 +4,12 @@ A **B**-factor **D**ata**B**ank (**BDB**) entry is a PDB entry with full
 isotropic B-factors. Information on the BDB decision scheme will shortly
 appear on this page.
 
+[What is a B-factor?](/theory)
+
 
 ### <a name="motivation"></a>Motivation
 If protein engineers, homology modellers, biologists, or bioinformaticians need
-B-values from a PDB file, they normally want full isotropic B-values. Normally
+B-factor from a PDB file, they normally want full isotropic B-factors. Normally
 it is indeed the full B-factor that is stored in the B-factor field in the ATOM
 records of a PDB file. However, the field contains different measures in some
 files, such as residual B-factors in case TLS refinement has been used
@@ -50,15 +52,14 @@ residue, or individual B-factors.
 **C&alpha; only**: indicates if the protein chain only consists of a C&alpha;
 trace.
 
-**Reproducible fraction of B-factors**: the fraction of B<sub>eq</sub> values
+**Reproducible fraction of B-factors**: the fraction of B~eq~ values
 in the B-factor field of the ATOM records that could be reproduced using the
 anisotropic temperature factors in the ANISOU records.
 
 **Anisotropic temperature factors specified in correct order**: indicates if
-B<sub>eq</sub> values could be calculated using the first three elements of
-the anisotropic temperature factors in the ANISOU records (U<sub>11</sub>,
-U<sub>22</sub>, and U<sub>33</sub>) or if a non-standard U<sub>ij</sub>
-combination was necessary for the calculation.
+B~eq~ values could be calculated using the first three elements of the
+anisotropic temperature factors in the ANISOU records (U~11~, U~22~, and U~33~)
+or if a non-standard U~ij~ combination was necessary for the calculation.
 
 **Other refinement remarks**: the "OTHER REFINEMENT REMARKS" section of REMARK
 3.

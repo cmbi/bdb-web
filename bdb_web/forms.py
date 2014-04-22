@@ -6,7 +6,7 @@ from bdb_data import PDB_ID_PAT
 
 
 class SearchForm(Form):
-    message = "Please provide a valid PDB identifier."
+    message = "Please provide a valid PDB identifier"
     name = TextField(
             label="Search a BDB entry",
             validators = [Regexp(regex=PDB_ID_PAT, message=message)],

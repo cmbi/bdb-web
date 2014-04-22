@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_flatpages import FlatPages, pygments_style_defs
+from flask_flatpages_pandoc import FlatPagesPandoc
 import logging
 import os
 
@@ -23,11 +24,13 @@ FLATPAGES_EXTENSION = ".md"
 FLATPAGES_MARKDOWN_EXTENSIONS = ["codehilite", "tables", "def_list",
                                  "footnotes", "admonition", "fenced_code"]
 
-
 app = Flask(__name__, static_folder="static")
 app.config.from_object(__name__)
 app.config.from_envvar("BDB_WEB_SETTINGS")
+
+
 flat_pages = FlatPages(app)
+FlatPagesPandoc("markdown", app, ["--mathjax", "-s"], pre_render=True)
 
 
 import bdb_web.views
