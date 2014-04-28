@@ -121,6 +121,16 @@
     <td>{{ bdb_metadata["nucleic_b"] if bdb_metadata["nucleic_b"] else "n/a" }}</td>
   </tr>
   <tr>
+    <td>P only</td>
+    <td>
+      {% if bdb_metadata["nucleic_b"] %}
+      {{ "yes" if bdb_metadata["phos_only"] else "no" }}
+      {% else %}
+      n/a
+      {% endif %}
+    </td>
+  </tr>
+  <tr>
     <td> </td>
     <td> </td>
   </tr>
