@@ -28,18 +28,6 @@ Wouter G. Touw & Gert Vriend,
 ---
 
 
-### <a name="decision"></a>Decision scheme
-The decision scheme behind the creation of BDB entries uses information
-directly obtained from PDB entries. (See [info](#info) on BDB entry pages
-below).
-
-#### Decisions
-![Decision diagram](/static/images/flowchart.svg)
-
-
----
-
-
 ### <a name="info"></a>Explanation of BDB entry pages
 These pages will show whether full B-factors have been calculated from the PDB
 file or if full B-factors were already present in the PDB file. The information
