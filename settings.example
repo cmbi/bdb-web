@@ -2,5 +2,8 @@
 PDB_SEARCH_URL = "http://www.rcsb.org/pdb/explore/explore.do?structureId="
 WHY_NOT_SEARCH_URL = "http://www.cmbi.ru.nl/WHY_NOT2/search/pdbid/"
 BDB_ROOT = "bdb"
-DEBUG = True
 SECRET_KEY = "dummy secret key"
+MAIL_SERVER = "127.0.0.1"
+MAIL_SMTP_PORT = 25
+MAIL_FROM = "bdb-web_error@example.com"
+MAIL_TO = ["yourname@example.com"]

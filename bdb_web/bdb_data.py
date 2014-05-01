@@ -101,7 +101,7 @@ def parse_bdb_metadata(pdb_id):
             metadata = json.load(jf)
             metadata = prepare_metadata(metadata)
     except IOError:
-        _log.error("File " + json_name + " not found!")
+        _log.warn("File " + json_name + " not found!")
     except (TypeError, ValueError) as e:
         _log.error(e)
     return metadata

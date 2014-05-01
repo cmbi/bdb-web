@@ -19,8 +19,7 @@ def bdb(pdb_id):
             bdb_metadata=bdb_data.parse_bdb_metadata(pdb_id),
             bdb_url=bdb_data.generate_bdb_url(pdb_id),
             pdb_url=bdb_data.generate_pdb_url(pdb_id),
-            whynot_url=bdb_data.generate_whynot_url(pdb_id)
-            )
+            whynot_url=bdb_data.generate_whynot_url(pdb_id))
 
 
 @app.route("/download/<pdb_id>")
@@ -31,8 +30,7 @@ def download(pdb_id):
             filename=pdb_id + ".bdb",
             mimetype="chemical/x-pdb",
             as_attachment=True,
-            attachment_filename=pdb_id + ".bdb"
-            )
+            attachment_filename=pdb_id + ".bdb")
 
 
 @app.route("/")
@@ -43,6 +41,11 @@ def index():
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template("404.html"), 404
+
+
+@app.errorhandler(500)
+def page_not_found(error):
+    return render_template("500.html"), 500
 
 
 @app.route("/<name>/")
