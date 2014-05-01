@@ -1,27 +1,26 @@
-from flask import (g, redirect, request, render_template, send_from_directory,
-                   url_for)
-from flask_flatpages import pygments_style_defs
-
-from bdb_web import app, bdb_data, flat_pages, forms
-
 import logging
 _log = logging.getLogger("bdb")
 
 
+from flask import (g, redirect, request, render_template, send_from_directory,
+                   url_for)
+from flask_flatpages import pygments_style_defs
+
+
+from bdb_web import app, bdb_data, flat_pages, forms
+
+
+
 @app.route("/bdb/<pdb_id>")
-def bdb(pdb_id=None):
-    if pdb_id is None:
-        # TODO: Send json response to web page so it can display an error.
-        pass
-    else:
-        pdb_id = pdb_id.lower()
-        return render_template(
-                "bdb.html",
-                bdb_metadata=bdb_data.parse_bdb_metadata(pdb_id),
-                bdb_url=bdb_data.generate_bdb_url(pdb_id),
-                pdb_url=bdb_data.generate_pdb_url(pdb_id),
-                whynot_url=bdb_data.generate_whynot_url(pdb_id)
-                )
+def bdb(pdb_id):
+    pdb_id = pdb_id.lower()
+    return render_template(
+            "bdb.html",
+            bdb_metadata=bdb_data.parse_bdb_metadata(pdb_id),
+            bdb_url=bdb_data.generate_bdb_url(pdb_id),
+            pdb_url=bdb_data.generate_pdb_url(pdb_id),
+            whynot_url=bdb_data.generate_whynot_url(pdb_id)
+            )
 
 
 @app.route("/download/<pdb_id>")
@@ -71,5 +70,3 @@ def before_request():
     g.search_form = forms.SearchForm(request.args)
 
 
-if __name__ == "__main__":
-    app.run()
