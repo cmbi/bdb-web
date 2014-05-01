@@ -1,5 +1,6 @@
-from bdb_web.bdb_data import bdb_dir, bdb_path, generate_bdb_url,\
-parse_bdb_metadata, prepare_metadata, valid_pdb_id
+from bdb_web.bdb_data import (bdb_dir, bdb_path, generate_bdb_url,
+                              parse_bdb_metadata, prepare_metadata,
+                              valid_pdb_id)
 from mock import patch
 from nose.tools import assert_true, eq_, raises
 

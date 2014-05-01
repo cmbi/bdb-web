@@ -12,7 +12,8 @@ _log.addHandler(_file)
 _cons = logging.StreamHandler()
 _log.addHandler(_cons)
 _formatter1 = logging.Formatter(
-        "%(asctime)s | %(levelname)-7s | %(message)s")
+        "%(asctime)s | %(levelname)-7s | %(message)s | "
+        "[in %(pathname)s:%(lineno)d]")
 _formatter2 = logging.Formatter(
         "%(message)s")
 _log.setLevel(logging.INFO)
@@ -28,6 +29,26 @@ app = Flask(__name__, static_folder="static")
 app.config.from_object(__name__)
 app.config.from_envvar("BDB_WEB_SETTINGS")
 
+if not app.debug:
+    from logging.handlers import SMTPHandler
+    mail_handler = SMTPHandler((app.config["MAIL_SERVER"],
+                                app.config["MAIL_SMTP_PORT"]),
+                               app.config["MAIL_FROM"],
+                               app.config["MAIL_TO"],
+                               "bdb-web failed")
+    mail_handler.setLevel(logging.ERROR)
+    app.logger.addHandler(mail_handler)
+    mail_handler.setFormatter(logging.Formatter("""
+    Message type:       %(levelname)s
+    Location:           %(pathname)s:%(lineno)d
+    Module:             %(module)s
+    Function:           %(funcName)s
+    Time:               %(asctime)s
+
+    Message:
+
+    %(message)s
+    """))
 
 flat_pages = FlatPages(app)
 FlatPagesPandoc("markdown", app, ["--mathjax", "-s"], pre_render=True)
