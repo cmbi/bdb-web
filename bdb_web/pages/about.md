@@ -26,7 +26,6 @@ Wouter G. Touw & Gert Vriend,
 
 
 </br>
-</br>
 
 
 ### <a name="info"></a>Explanation of BDB entry pages
@@ -73,7 +72,6 @@ or if a non-standard U~ij~ combination was necessary for the calculation.
 file.
 
 
-</br>
 </br>
 
 
