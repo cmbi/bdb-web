@@ -3,7 +3,7 @@ title: About
 A **B**-factor **D**ata**B**ank (**BDB**) entry is a PDB entry with full
 isotropic B-factors.
 
-[What is a B-factor?](/theory)
+[What is a B-factor?][1]
 
 
 ### <a name="motivation"></a>Motivation
@@ -37,7 +37,7 @@ Entry Format sections. The refinement section is subdivided in software,
 TLS-related info, other B-factor info and other refinement remarks.
 
 **B-factor type according to PDB remediation**: in 2011 several problems were
-[remediated](http://www.wwpdb.org/remediation.html) by the PDB. The
+[remediated][2] by the PDB. The
 remediations included fixing TLS group definitions and determining whether the
 B-factor type in the PDB file is likely to be residual or not. If the B-factor
 type could not be verified according to the remediation a BDB file has not been
@@ -79,4 +79,9 @@ file.
 
 ### Created by
 Wouter Touw &
-[Gert Vriend](http://swift.cmbi.ru.nl/gv)
+[Gert Vriend][3]
+
+
+[1]: /theory
+[2]: http://www.wwpdb.org/remediation.html
+[3]: http://swift.cmbi.ru.nl/gv

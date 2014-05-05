@@ -1,6 +1,6 @@
 title: What is a B-factor?
 
-The following is heavily based on [Trueblood et al., 1996](http://www.iucr.org/resources/commissions/crystallographic-nomenclature/adp)
+The following is heavily based on [Trueblood et al., 1996][1]
 and references therein.
 
 ---
@@ -14,7 +14,7 @@ by the atomic anisotropic Gaussian Debye-Waller factor
 
 $T(\textbf{h}) = \exp{[-8\pi^2 \langle u_\textbf{h}^2 \rangle \frac{\sin^2 \theta}{\lambda^2}]}$. (1)
 
-(equation 1.4.12 from [Trueblood et al., 1996](http://www.iucr.org/resources/commissions/crystallographic-nomenclature/adp)).
+(equation 1.4.12 from [Trueblood et al., 1996][1]).
 Here $u_\textbf{h}$ is the projection of the atomic displacement $\textbf{u}$
 on the direction of diffraction vector $\textbf{h}$, $\theta$ is the scattering angle
 and $\lambda$ is the X-ray wavelength. The average in the exponent denotes an
@@ -40,7 +40,7 @@ Debye-Waller factor only depends on the magnitude of $\textbf{h}$:
 
 $T(|\textbf{h}|)=\exp{[-8\pi^2 \langle u^2 \rangle \frac{\sin^2 \theta}{\lambda^2}]}$. (4)
 
-(equation 1.4.13 from [Trueblood et al., 1996](http://www.iucr.org/resources/commissions/crystallographic-nomenclature/adp)).
+(equation 1.4.13 from [Trueblood et al., 1996][1]).
 The B-factor is directly related to the mean square isotropic displacement of
 the atom:
 
@@ -64,3 +64,5 @@ $U_{eq}$ is equivalent to the sum of the eigenvalues of $\textbf{U}$ and
 represents the mean-square displacement averaged over all directions.
 The ANISOU records or PDB entries normally contain the six independent elements
 of the symmetric tensor scaled by a factor 10^4^.
+
+[1]: http://www.iucr.org/resources/commissions/crystallographic-nomenclature/adp
