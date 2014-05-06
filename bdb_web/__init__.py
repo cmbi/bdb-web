@@ -1,8 +1,12 @@
+import logging
+import os
+
 from flask import Flask
 from flask_flatpages import FlatPages, pygments_style_defs
 from flask_flatpages_pandoc import FlatPagesPandoc
-import logging
-import os
+
+from werkzeug.wsgi import DispatcherMiddleware
+
 
 
 _log = logging.getLogger("bdb")
@@ -29,6 +33,9 @@ app = Flask(__name__, static_folder="static")
 app.config.from_object(__name__)
 app.config.from_envvar("BDB_WEB_SETTINGS")
 
+application = DispatcherMiddleware(Flask('dummy_app'),
+                                   {app.config['APPLICATION_ROOT']: app})
+
 if not app.debug:
     from logging.handlers import SMTPHandler
     mail_handler = SMTPHandler((app.config["MAIL_SERVER"],
@@ -51,7 +58,7 @@ if not app.debug:
     """))
 
 flat_pages = FlatPages(app)
-FlatPagesPandoc("markdown", app, ["--mathjax", "-s"], pre_render=True)
+FlatPagesPandoc("markdown", app, ["--mathml", ], pre_render=True)
 
 
 import bdb_web.views
