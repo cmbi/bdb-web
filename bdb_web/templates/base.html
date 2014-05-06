@@ -1,10 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title></title>
-    </head>
-    <body>
-        {% block content %}
-        {% endblock %}
-    </body>
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <link type="text/css" rel="stylesheet"
+          href="{{ url_for('static', filename='reset.css') }}" />
+    <link type="text/css" rel="stylesheet"
+          href="{{ url_for('static', filename='master.css') }}" />
+    <link type="text/css" rel="stylesheet"
+          href="{{ url_for('pygments_css') }}">
+    <!-- Otherwise IE loads into quirksmode for unkown reasons -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="shortcut icon" 
+          href="{{ url_for('static', filename='icons/favicon.ico') }}"
+	  type="image/x-icon">
+  </head>
+  <body>
+    <header id="main">
+      <nav>
+        <h1><a href="{{ url_for('index') }}" title="BDB">BDB</a></h1>
+        <ul>
+          <li>
+            {% from "_formhelpers.html" import render_field %}
+            <form style="display: inline;" action="{{ url_for('search') }}"
+                  method="get" name="search">
+              {{ g.search_form.hidden_tag() }}
+              {{ render_field(g.search_form.name) }}
+              <input type="image" title="Search" alt="Search"
+                src="{{ url_for('static', filename='icons/search_48x48.png') }}"
+                onsubmit="submit();"/>
+            </form>
+          </li>
+          <li>
+            <a href="{{ url_for('pages', name='about') }}" title="About" alt="About">
+              <img src="{{ url_for('static', filename='icons/about_48x48.png') }}"/>
+            </a>
+          </li>
+          <li>
+            <a href="{{ url_for('pages', name='links') }}" title="External links" alt="External links">
+              <img src="{{ url_for('static', filename='icons/link_48x48.png') }}"/>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <div id="wrapper">
+      {% block content %}
+      {% endblock %}
+    </div>
+    <footer>
+      <br/>
+    </footer>
+  </body>
 </html>

@@ -1,40 +1,206 @@
 {% extends "base.html" %}
 
+{% block title %}
+  {{ 'BDB' }}
+{% endblock %}
+
 {% block content %}
 
 <h2>BDB Metadata</h2>
 
 {% if bdb_metadata %}
+<h2>
+  <a href="{{ pdb_url }}">{{ bdb_metadata["pdb_id"] }}</a>
+</h2>
+<br/>
+<h3>
+  {% if bdb_metadata["assume_iso"] %}
+  Full B-factors found in PDB file
+  {% else %}
+  Full B-factors calculated from PDB file
+  {% endif %}
+</h3>
+</br>
+<h3>Refinement</h3>
+<h4>Software</h4>
 <table>
   <tr>
-    <th>Key</th>
-    <th>Value</th>
-  </tr>
-{% for key, item in bdb_metadata.iteritems() %}
+    <th class="column-1">According to refinement remarks</th>
+    <th class="column-2"> </th>
+</tr>
   <tr>
-    <td>{{ key }}</td>
-    <td>{{ item }}</td>
+    <td>Refinement program(s)</td>
+    <td>{{ bdb_metadata["refprog"] }}</td>
   </tr>
-{% endfor %}
+  <tr>
+    <td> </td>
+    <td> </td>
+</tr>
+  <tr>
+    <th>Interpretation</th>
+    <th> </th>
+</tr>
+  <tr>
+    <td>Program(s)</td>
+    <td>{{ bdb_metadata["prog_inter"] }}</td>
+  </tr>
+  <tr>
+    <td>Version(s)</td>
+    <td>{{ bdb_metadata["prog_vers"] }}</td>
+  </tr>
+  <tr>
+    <td>Last used program</td>
+    <td>{{ bdb_metadata["prog_last"] }}</td>
+  </tr>
 </table>
+<h4>TLS</h4>
+<table>
+  <tr>
+    <th class="column-1">According to PDB remediation</th>
+    <th class="column-2"> </th>
+  </tr>
+  <tr>
+    <td>B-factor type</td>
+    <td>{{ bdb_metadata["b_type"] if bdb_metadata["b_type"] else "not specified" }}</td>
+  </tr>
+  <tr>
+    <td> </td>
+    <td> </td>
+  </tr>
+  <tr>
+    <th>According to refinement remarks</th>
+    <th> </th>
+  </tr>
+  <tr>
+    <td>TLS groups</td>
+    <td>{{ bdb_metadata["tls_groups"] if bdb_metadata["tls_groups"] else "not specified" }}</td>
+  </tr>
+  <tr>
+    <td>B-factors residual</td>
+    <td>{{ "yes" if bdb_metadata["tls_residual"] else "not found" }}</td>
+  </tr>
+  <tr>
+    <td>B-factors sum of TLS and residual components</td>
+    <td>{{ "yes" if bdb_metadata["tls_sum"] else "not found" }}</td>
+  </tr>
+</table>
+<h4>Other B-factor info</h4>
+<table>
+  <tr>
+    <th class="column-1">According to refinement remarks</th>
+    <th class="column-2"> </th>
+  </tr>
+  <tr>
+    <td>B-factor field contains U<sup>2</sup> instead of 8&pi;<sup>2</sup>U<sup>2</sup></td>
+    <td>{{ "yes" if bdb_metadata["b_msqav"] else "not found"}}</td>
+  </tr>
+  <tr>
+    <td> </td>
+    <td> </td>
+  </tr>
+  <tr>
+    <th class="column-1">Derived from ATOM records</th>
+    <th class="column-2"> </th>
+  </tr>
+  <tr>
+    <td>B-factor group type protein</td>
+    <td>{{ bdb_metadata["protein_b"] if bdb_metadata["protein_b"] else "n/a" }}</td>
+  </tr>
+  <tr>
+    <td>C&alpha; only</td>
+    <td>
+      {% if bdb_metadata["protein_b"] %}
+      {{ "yes" if bdb_metadata["calpha_only"] else "no" }}
+      {% else %}
+      n/a
+      {% endif %}
+    </td>
+  </tr>
+  <tr>
+    <td>B-factor group type nucleic acid</td>
+    <td>{{ bdb_metadata["nucleic_b"] if bdb_metadata["nucleic_b"] else "n/a" }}</td>
+  </tr>
+  <tr>
+    <td>P only</td>
+    <td>
+      {% if bdb_metadata["nucleic_b"] %}
+      {{ "yes" if bdb_metadata["phos_only"] else "no" }}
+      {% else %}
+      n/a
+      {% endif %}
+    </td>
+  </tr>
+  <tr>
+    <td> </td>
+    <td> </td>
+  </tr>
+  <tr>
+    <th class="column-1">Derived from ANISOU records</th>
+    <th class="column-2"> </th>
+  </tr>
+  <tr>
+    <td>Reproducible fraction of B-factors</td>
+    <td>{{ bdb_metadata["beq_identical"] if bdb_metadata["has_anisou"] else "n/a" }}</td>
+  </tr>
+  <tr>
+    <td>Anisotropic temperature factors specified in correct order</td>
+    <td>
+      {% if bdb_metadata["has_anisou"] %}
+      {{ "yes" if bdb_metadata["correct_uij"] else "no" }}
+      {% else %}
+      n/a
+      {% endif %}
+    </td>
+  </tr>
+</table>
+<h4>Other refinement remarks</h4>
+<small>{{ bdb_metadata["other_refinement_remarks"] }}</small>
+</br>
+</br>
+<h3>PDB Entry Format</h3>
+<table>
+  <tr>
+    <td class="column-1">Date</td>
+    <td class="column-2">{{ bdb_metadata["format_date"] }}</td>
+  </tr>
+  <tr>
+    <td>Version</td>
+    <td>{{ bdb_metadata["format_vers"] }}</td>
+  </tr>
+</table>
+</br>
+<h3>Automatic interpretation</h3>
+{{ bdb_metadata["decision"] }}
 {% else %}
 Not found
 {% endif %}
-
+</br>
+</br>
+</br>
 <h2>Links</h2>
 
+<span>BDB file:</span>
 {% if bdb_url %}
-  <span>BDB file:</span><a href="{{ bdb_url }}">download</a>
+  <a href="{{ bdb_url }}">download</a>
 {% else %}
-  <span>BDB file:</span>Does not exist
+  Does not exist
 {% endif %}
 
 <br/>
 
+<span>
 {% if whynot_url %}
-  <span><a href="{{ whynot_url }}">WHY NOT</a></span>
-{% else %}
-  <span></span>
+    <a href="{{ whynot_url }}">WHY NOT</a>
 {% endif %}
+</span>
+
+<br/>
+
+<span>
+{% if pdb_url %}
+    <a href="{{ pdb_url }}">PDB</a>
+{% endif %}
+</span>
+
 
 {% endblock %}

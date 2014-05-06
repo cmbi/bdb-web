@@ -1,3 +1,20 @@
-<!doctype html>
-<title>Welcome to BDB</title>
+{% extends "base.html" %}
+
+{% block title %}
+  {{ 'BDB' }}
+{% endblock %}
+
+{% block content %}
+
 <h1>A databank of PDB entries with full isotropic B-factors</h1>
+</br>
+Enter a PDB code in the search box to view or download the corresponding BDB
+entry.
+</br></br>
+<h3>What is a BDB entry?</h3>
+Information on BDB entries, their construction, their web page, how to download
+the entire BDB, and how to cite the BDB can be found
+<a href="{{ url_for('pages', name='about') }}" title="About" alt="About">
+  here
+</a>.
+{% endblock %}

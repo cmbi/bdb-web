@@ -1,0 +1,27 @@
+{% macro render_field(field) %}
+  {{ field(title=field.description["title"],
+           size=field.description["size"],
+           results=field.description["results"],
+           placeholder=field.description["placeholder"],
+           required=field.description["required"],
+           pattern=field.description["pattern"].pattern) }}
+{% endmacro %}
+
+
+{% macro render_field_feedback(field) %}
+  <dt>{{ field.label }}
+  <dd>{{ field(title=field.description["title"],
+               size=field.description["size"],
+               results=field.description["results"],
+               placeholder=field.description["placeholder"],
+               required=field.description["required"],
+               pattern=field.description["pattern"].pattern) }}
+  {% if field.errors %}
+    <ul class=errors>
+    {% for error in field.errors %}
+      <li>{{ error }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+  </dd>
+{% endmacro %}

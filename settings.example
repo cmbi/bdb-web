@@ -1,4 +1,10 @@
-# Flask settings
-WHY_NOT_SEARCH_URL = "http://www.cmbi.ru.nl/WHY_NOT2/search/pdbid/"
+# Flask settings for version 0.1
+APPLICATION_ROOT = ""
 BDB_ROOT = "bdb"
-DEBUG = True
+MAIL_SERVER = "127.0.0.1"
+MAIL_SMTP_PORT = 25
+MAIL_FROM = "bdb-web_error@example.com"
+MAIL_TO = ["yourname@example.com"]
+PDB_SEARCH_URL = "http://www.rcsb.org/pdb/explore/explore.do?structureId="
+SECRET_KEY = "dummy secret key"
+WHY_NOT_SEARCH_URL = "http://www.cmbi.ru.nl/WHY_NOT2/search/pdbid/"
