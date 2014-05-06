@@ -54,6 +54,8 @@ of PDB files][2] normally contains the isotropic B-factor ([Figure 1][3]) or
 $B_{eq}$, the value that represents isotropic displacement of atoms that were
 described by anisotropic ADPs during refinement.
 
+</br>
+
 ```
 ATOM      1  N   THR A   1      17.047  14.099   3.625  1.00 13.79           N  
 ATOM      2  CA  THR A   1      16.967  12.784   4.338  1.00 10.80           C  
@@ -82,6 +84,8 @@ represents the mean-square displacement averaged over all directions.
 The [ANISOU records of PDB entries][5] normally contain the six independent
 elements of the [symmetric tensor][9] scaled by a factor 10^4^ ([Figure 2][6]).
 
+</br>
+
 ```
 ATOM   3293  N   GLY B 635      15.522  -6.753  35.480  1.00 67.46           N  
 ANISOU 3293  N   GLY B 635     7637  10155   7840    125    844     10       N  
@@ -100,11 +104,12 @@ the equivalent B-factor, B~eq~, calculated from the six U~ij~ elements ([eq. 3]
 </br>
 
 [1]: http://www.iucr.org/resources/commissions/crystallographic-nomenclature/adp
-[2]: http://www.wwpdb.org/documentation/format33/sect9.html#ATOM
-[3]: #fig1
-[4]: http://www.rcsb.org/pdb/explore/explore.do?structureId=1crn
-[5]: http://www.wwpdb.org/documentation/format33/sect9.html#ANISOU
-[6]: #fig2
-[7]: http://www.rcsb.org/pdb/explore/explore.do?structureId=3zzw
-[8]: #eq6
-[9]: #eq3
+[2]: http://www.wwpdb.org/documentation/format33/sect9.html#ATOM "ATOM records"
+[3]: #fig1 "Figure 1"
+[4]: http://www.rcsb.org/pdb/explore/explore.do?structureId=1crn "1crn"
+[5]: http://www.wwpdb.org/documentation/format33/sect9.html#ANISOU "ANISOU
+records"
+[6]: #fig2 "Figure 2"
+[7]: http://www.rcsb.org/pdb/explore/explore.do?structureId=3zzw "3zzw"
+[8]: #eq6 "Equation 6"
+[9]: #eq3 "Equation 3"
