@@ -1,11 +1,12 @@
+import logging
+import os
+
 from flask import Flask
 from flask_flatpages import FlatPages, pygments_style_defs
 from flask_flatpages_pandoc import FlatPagesPandoc
 
 from werkzeug.wsgi import DispatcherMiddleware
 
-import logging
-import os
 
 
 _log = logging.getLogger("bdb")
@@ -33,7 +34,7 @@ app.config.from_object(__name__)
 app.config.from_envvar("BDB_WEB_SETTINGS")
 
 application = DispatcherMiddleware(Flask('dummy_app'),
-				   {app.config['APPLICATION_ROOT']: app,})
+                                   {app.config['APPLICATION_ROOT']: app})
 
 if not app.debug:
     from logging.handlers import SMTPHandler

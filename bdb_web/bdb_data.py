@@ -1,12 +1,13 @@
-from flask import url_for
-from bdb_web import app
+import logging
+_log = logging.getLogger("bdb")
+
 import json
 import os
 import re
 
+from flask import url_for
 
-import logging
-_log = logging.getLogger("bdb")
+from bdb_web import app
 
 
 PDB_ID_PAT = re.compile(r"^[0-9a-zA-Z]{4}$")
