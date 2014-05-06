@@ -65,6 +65,7 @@ ATOM      5  CB  THR A   1      18.170  12.703   5.337  1.00 13.02           C
 ATOM      6  OG1 THR A   1      19.334  12.829   4.463  1.00 15.06           O  
 ATOM      7  CG2 THR A   1      18.150  11.546   6.304  1.00 14.23           C  
 ```
+
 **<a name="fig1"></a>Figure 1** Thr 1 from [1crn][4]. The last numeric column
 of these [ATOM records][2] holds the B-factor.
 </br>
@@ -96,6 +97,7 @@ ANISOU 3295  C   GLY B 635     7997  10158   8244     -4    724   -496       C
 ATOM   3296  O   GLY B 635      15.107  -3.358  35.185  1.00 71.22           O  
 ANISOU 3296  O   GLY B 635     8207  10502   8350    -17    684   -734       O  
 ```
+
 **<a name="fig2"></a>Figure 2** Gly 635 from [3zzw][7]. U~11~, U~12~, U~13~,
 U~12~, U~13~, and U~23~ are stored in the [ANISOU records][5] after the
 identifier columns. The last numeric column of the [ATOM records][2] is

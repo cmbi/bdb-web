@@ -88,7 +88,7 @@ Wouter Touw &
 [Gert Vriend][4]
 
 
-[1]: /theory "Theory"
+[1]: {{ url_for('pages', name='theory') }}  "Theory"
 [2]: http://www.cmbi.ru.nl/WHY_NOT2/resources/list/BDB_PRESENT "List of all BDB
 entries"
 [3]: http://www.wwpdb.org/remediation.html "PDB remediation"
