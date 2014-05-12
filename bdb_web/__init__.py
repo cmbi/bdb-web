@@ -14,12 +14,9 @@ _log.setLevel(logging.INFO)
 _file.setFormatter(_formatter1)
 
 
-
 from flask import Flask
 from flask_flatpages import FlatPages, pygments_style_defs
 from flask_flatpages_pandoc import FlatPagesPandoc
-
-from werkzeug.wsgi import DispatcherMiddleware
 
 
 FLATPAGES_EXTENSION = ".md"
@@ -30,8 +27,8 @@ app = Flask(__name__, static_folder="static")
 app.config.from_object(__name__)
 app.config.from_envvar("BDB_WEB_SETTINGS")
 
-application = DispatcherMiddleware(Flask('dummy_app'),
-                                   {app.config['APPLICATION_ROOT']: app})
+from bdb_web.rev_proxy import ReverseProxied
+app.wsgi_app = ReverseProxied(app.wsgi_app)
 
 if not app.debug:
     app.logger.addHandler(_file)

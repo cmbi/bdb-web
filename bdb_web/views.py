@@ -11,7 +11,7 @@ from bdb_web import app, bdb_data, flat_pages, forms
 
 
 
-@app.route("/bdb/<pdb_id>/")
+@app.route("/entry/<pdb_id>/")
 def bdb(pdb_id):
     pdb_id = pdb_id.lower()
     return render_template(
@@ -71,5 +71,3 @@ def search():
 @app.before_request
 def before_request():
     g.search_form = forms.SearchForm(request.args)
-
-
