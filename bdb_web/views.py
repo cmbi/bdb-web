@@ -1,5 +1,5 @@
 import logging
-_log = logging.getLogger("bdb")
+_log = logging.getLogger("bdb-web")
 
 
 from flask import (g, redirect, request, render_template, send_from_directory,
