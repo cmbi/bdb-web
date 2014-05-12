@@ -1,5 +1,5 @@
 import logging
-_log = logging.getLogger("bdb")
+_log = logging.getLogger("bdb-web")
 
 import json
 import os
