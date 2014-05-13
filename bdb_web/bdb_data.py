@@ -48,7 +48,9 @@ def generate_bdb_url(pdb_id):
     try:
         if bdb_exists(pdb_id):
             bdb_url = url_for("download", pdb_id=pdb_id)
-    except (TypeError, ValueError) as e:
+    except ValueError as e:
+        _log.debug(e)
+    except TypeError as e:
         _log.error(e)
     return bdb_url
 
@@ -98,12 +100,17 @@ def parse_bdb_metadata(pdb_id):
     metadata = None
     try:
         json_name = os.path.join(bdb_dir(pdb_id), pdb_id + ".json")
+        if not os.path.isfile(json_name):
+            _log.debug("File " + json_name + " not found!")
+            return None
         with open(json_name, "r") as jf:
             metadata = json.load(jf)
             metadata = prepare_metadata(metadata)
-    except IOError:
-        _log.warn("File " + json_name + " not found!")
-    except (TypeError, ValueError) as e:
+    except ValueError as e:
+        _log.debug(e)
+    except IOError as e:
+        _log.error(e)
+    except TypeError as e:
         _log.error(e)
     return metadata
 
@@ -132,7 +139,7 @@ def valid_pdb_id(pdb_id):
     except TypeError:
         raise TypeError("PDB identifier should be a string")
     if not re.search(PDB_ID_PAT, valid) or pdb_id is None:
-        raise ValueError("Not a valid PDB identifier")
+        raise ValueError("Not a valid PDB identifier: {}".format(pdb_id))
     return valid
 
 
