@@ -52,7 +52,7 @@ if not app.debug:
     """))
 
 flat_pages = FlatPages(app)
-FlatPagesPandoc("markdown", app, ["--mathml", ], pre_render=True)
+FlatPagesPandoc("markdown", app, ["--mathjax", "-s"], pre_render=True)
 
 
 import bdb_web.views

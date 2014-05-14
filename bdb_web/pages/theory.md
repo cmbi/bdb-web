@@ -3,8 +3,6 @@ title: What is a B-factor?
 The following is heavily based on [Trueblood et al., 1996][1]
 and references therein.
 
-<font color="red">Currently, the formulas are only rendered correctly in Firefox browsers.</font>
-
 ---
 
 Displacement of atoms from their mean position in a crystal structure
