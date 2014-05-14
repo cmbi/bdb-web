@@ -46,15 +46,20 @@ the atom:
 
 $B = 8\pi^2 \langle u^2 \rangle$. (5)
 
+A macromolecular crystal structure is typically represented by three
+coordinates (X,Y,Z), an [occupancy][13] parameter, and a "temperature factor"
+in the [coordinate section][10] of PDB files ([Figure 1][3]). These parameters
+are estimated during a computational process crystallographers refer to as
+*refinement*. The goal of refinement is to improve the agreement between the
+modeled structure and the reflections measured in the diffraction experiment.
 The (an)isotropic displacement parameters are variables during a typical
 refinement and may therefore also contain contributions of apparent
 displacements resulting from the use of an inadequate model or from overlooked
-errors in the X-ray data. The "temperature factor" field in the [ATOM records
-of PDB files][2] normally contains the isotropic B-factor ([Figure 1][3]) or
-$B_{eq}$, the value that represents isotropic displacement of atoms that were
-described by anisotropic ADPs during refinement.
+errors in the X-ray data. The "temperature factor" field in the [ATOM
+records][2] of PDB files normally contains the isotropic B-factor (
+[Figure 1][3]) or $B_{eq}$, the value that represents isotropic displacement of
+atoms that were described by anisotropic ADPs during refinement.
 
-</br>
 
 ```
 ATOM      1  N   THR A   1      17.047  14.099   3.625  1.00 13.79           N  
@@ -66,8 +71,9 @@ ATOM      6  OG1 THR A   1      19.334  12.829   4.463  1.00 15.06           O
 ATOM      7  CG2 THR A   1      18.150  11.546   6.304  1.00 14.23           C  
 ```
 
-**<a name="fig1"></a>Figure 1** Thr 1 from [1crn][4]. The last numeric column
-of these [ATOM records][2] holds the B-factor.
+**<a name="fig1"></a>Figure 1** Thr 1 from [1crn][4]. After the atom's
+identifiers the XYZ coordinates, occupancy, and B-factor are listed in these
+[ATOM records][2].
 </br>
 </br>
 
@@ -85,7 +91,6 @@ represents the mean-square displacement averaged over all directions.
 The [ANISOU records of PDB entries][5] normally contain the six independent
 elements of the [symmetric tensor][9] scaled by a factor 10^4^ ([Figure 2][6]).
 
-</br>
 
 ```
 ATOM   3293  N   GLY B 635      15.522  -6.753  35.480  1.00 67.46           N  
@@ -104,6 +109,54 @@ identifier columns. The last numeric column of the [ATOM records][2] is
 the equivalent B-factor, B~eq~, calculated from the six U~ij~ elements ([eq. 3]
 [9]) in the ANISOU records ([eq. 6][8]).
 </br>
+</br>
+
+###<a name="occ"></a>Occupancy
+B-factors in PDB files commonly are seen as a measure of (local) mobility in
+the (macro)molecule. As mentioned above, this is only partly true.
+
+When 3D structures are solved by crystallography, then, as the name suggests,
+crystals are needed. And in crystals by necessity crystal artefacts are
+observed. The three most important artefacts are
+1) crystal packing artefacts at those locations where the (macro)molecules
+interact with other (macro)molecules in the crystal;
+2) parts of the crystal have a different conformation of the molecule (static
+disorder);
+3) alternate locations when parts of the macromolecule are happy in multiple
+conformations (dynamic disorder).
+Crystal packing artefacts are a whole story in themselves
+and are not of relevance for the BDB. You find information about these
+artefacts in other PDB-facilities.
+Alternate locations are most often seen for amino acid side chains when these
+can have multiple rotamers that are energetically similarly favourable.
+If this is observed in the crystal, then you will find side multiple chain
+atoms with alternate location indicators A, B, etc. The occupancies normally
+add up to unity ([Figure 3][11]). If no alternates have been observed, the
+occupancy simply equals 1.00 (e.g. [Figure 1][3], [Figure 2][6])
+
+
+```
+ATOM    435  N   SER A  69      78.391  18.901  31.786  1.00  8.05           N  
+ATOM    436  CA ASER A  69      77.622  17.702  31.446  0.70  8.36           C  
+ATOM    437  CA BSER A  69      77.646  17.698  31.413  0.30  8.16           C  
+ATOM    438  C   SER A  69      76.425  18.043  30.558  1.00  8.31           C  
+ATOM    439  O   SER A  69      76.220  17.431  29.497  1.00  8.35           O  
+ATOM    440  CB ASER A  69      77.152  17.000  32.717  0.70  9.01           C  
+ATOM    441  CB BSER A  69      77.274  16.853  32.636  0.30  8.36           C  
+ATOM    442  OG ASER A  69      76.383  15.862  32.393  0.70 10.15           O  
+ATOM    443  OG BSER A  69      76.364  17.530  33.477  0.30  8.59           O  
+```
+
+**<a name="fig3"></a>Figure 3** Ser 69 from [4jf1][12]. Two alternate locations
+have been observed for this side-chain (A and B) with occupancies 0.7 and 0.3.
+</br>
+</br>
+
+It is often impossible to accurately model occupancy and ADPs separately
+because they are highly correlated. Only at high resolution it may be possible
+to resolve close alternate positions instead of modeling the atoms with large
+B-factors.
+
 
 [1]: http://www.iucr.org/resources/commissions/crystallographic-nomenclature/adp
 [2]: http://www.wwpdb.org/documentation/format33/sect9.html#ATOM "ATOM records"
@@ -115,3 +168,8 @@ records"
 [7]: http://www.rcsb.org/pdb/explore/explore.do?structureId=3zzw "3zzw"
 [8]: #eq6 "Equation 6"
 [9]: #eq3 "Equation 3"
+[10]: http://www.wwpdb.org/documentation/format33/sect9.html "coordinate
+section"
+[11]: #fig3 "Figure 3"
+[12]: http://www.rcsb.org/pdb/explore/explore.do?structureId=4jf1 "4jf1"
+[13]: #occ "Occupancy"
