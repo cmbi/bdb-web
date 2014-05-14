@@ -1,28 +1,22 @@
 import logging
-import os
+from logging.handlers import RotatingFileHandler, SMTPHandler
 
-from flask import Flask
-from flask_flatpages import FlatPages, pygments_style_defs
-from flask_flatpages_pandoc import FlatPagesPandoc
-
-from werkzeug.wsgi import DispatcherMiddleware
-
-
-
-_log = logging.getLogger("bdb")
-log_file = os.path.join("bdb-web.log")
-_file = logging.FileHandler(log_file, "a")
+_log = logging.getLogger("bdb-web")
+log_file = "bdb-web.log"
+_file = RotatingFileHandler(log_file, "a", 524288, 5, "UTF-8")
 _log.addHandler(_file)
-_cons = logging.StreamHandler()
-_log.addHandler(_cons)
 _formatter1 = logging.Formatter(
-        "%(asctime)s | %(levelname)-7s | %(message)s | "
+        "%(asctime)s | %(levelname)-7s | %(message)s "
         "[in %(pathname)s:%(lineno)d]")
 _formatter2 = logging.Formatter(
         "%(message)s")
 _log.setLevel(logging.INFO)
 _file.setFormatter(_formatter1)
-_cons.setFormatter(_formatter2)
+
+
+from flask import Flask
+from flask_flatpages import FlatPages, pygments_style_defs
+from flask_flatpages_pandoc import FlatPagesPandoc
 
 
 FLATPAGES_EXTENSION = ".md"
@@ -33,11 +27,11 @@ app = Flask(__name__, static_folder="static")
 app.config.from_object(__name__)
 app.config.from_envvar("BDB_WEB_SETTINGS")
 
-application = DispatcherMiddleware(Flask('dummy_app'),
-                                   {app.config['APPLICATION_ROOT']: app})
+from bdb_web.rev_proxy import ReverseProxied
+app.wsgi_app = ReverseProxied(app.wsgi_app)
 
 if not app.debug:
-    from logging.handlers import SMTPHandler
+    app.logger.addHandler(_file)
     mail_handler = SMTPHandler((app.config["MAIL_SERVER"],
                                 app.config["MAIL_SMTP_PORT"]),
                                app.config["MAIL_FROM"],
@@ -58,7 +52,7 @@ if not app.debug:
     """))
 
 flat_pages = FlatPages(app)
-FlatPagesPandoc("markdown", app, ["--mathml", ], pre_render=True)
+FlatPagesPandoc("markdown", app, ["--mathjax", "-s"], pre_render=True)
 
 
 import bdb_web.views

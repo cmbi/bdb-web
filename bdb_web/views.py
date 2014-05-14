@@ -1,5 +1,5 @@
 import logging
-_log = logging.getLogger("bdb")
+_log = logging.getLogger("bdb-web")
 
 
 from flask import (g, redirect, request, render_template, send_from_directory,
@@ -11,7 +11,7 @@ from bdb_web import app, bdb_data, flat_pages, forms
 
 
 
-@app.route("/bdb/<pdb_id>")
+@app.route("/entry/<pdb_id>/")
 def bdb(pdb_id):
     pdb_id = pdb_id.lower()
     return render_template(
@@ -22,7 +22,7 @@ def bdb(pdb_id):
             whynot_url=bdb_data.generate_whynot_url(pdb_id))
 
 
-@app.route("/download/<pdb_id>")
+@app.route("/download/<pdb_id>/")
 def download(pdb_id):
     pdb_id = pdb_id.lower()
     return send_from_directory(
@@ -60,7 +60,7 @@ def pygments_css():
             {"Content-Type": "text/css"})
 
 
-@app.route("/search")
+@app.route("/search/")
 def search():
     form = forms.SearchForm(request.args)
     if not form.validate():
@@ -71,5 +71,3 @@ def search():
 @app.before_request
 def before_request():
     g.search_form = forms.SearchForm(request.args)
-
-
