@@ -36,6 +36,11 @@ A list of all BDB entries is available [here][2].
 
 </br>
 
+### <a name="download"></a>Download BDB entries
+The source code for generating BDB files from PDB files is available [here][3].
+
+</br>
+
 ### <a name="info"></a>Explanation of BDB entry pages
 These pages will show whether full B-factors have been calculated from the PDB
 file or if full B-factors were already present in the PDB file. The information
@@ -44,7 +49,7 @@ Entry Format sections. The refinement section is subdivided in software,
 TLS-related info, other B-factor info and other refinement remarks.
 
 **B-factor type according to PDB remediation**: in 2011 several problems were
-[remediated][3] by the PDB. The
+[remediated][4] by the PDB. The
 remediations included fixing TLS group definitions and determining whether the
 B-factor type in the PDB file is likely to be residual or not. If the B-factor
 type could not be verified according to the remediation a BDB file has not been
@@ -85,11 +90,12 @@ file.
 
 ### Created by
 Wouter Touw &
-[Gert Vriend][4]
+[Gert Vriend][5]
 
 
-[1]: {{ url_for('pages', name='theory') }}  "Theory"
+[1]: {{ url_for("pages", name="theory") }}  "Theory"
 [2]: http://www.cmbi.ru.nl/WHY_NOT2/resources/list/BDB_PRESENT "List of all BDB
 entries"
-[3]: http://www.wwpdb.org/remediation.html "PDB remediation"
-[4]: http://swift.cmbi.ru.nl/gv
+[3]: {{ url_for("static", filename="bdb-0.6.3.zip") }} "Source"
+[4]: http://www.wwpdb.org/remediation.html "PDB remediation"
+[5]: http://swift.cmbi.ru.nl/gv
