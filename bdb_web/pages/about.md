@@ -36,7 +36,7 @@ A list of all BDB entries is available [here][2].
 
 </br>
 
-### <a name="download"></a>Download BDB entries
+### <a name="source"></a>Source code
 The source code for generating BDB files from PDB files is available [here][3].
 
 </br>
