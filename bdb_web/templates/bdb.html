@@ -164,7 +164,13 @@
   </tr>
 </table>
 <h4>Other refinement remarks</h4>
-<small>{{ bdb_metadata["other_refinement_remarks"] }}</small>
+{% if bdb_metadata["other_refinement_remarks"] == "" %}
+  not specified
+{% else %}
+  <small>
+    {{ bdb_metadata["other_refinement_remarks"] }}
+  </small>
+{% endif %}
 </br>
 </br>
 <h3>PDB Entry Format</h3>
