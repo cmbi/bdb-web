@@ -61,7 +61,17 @@
   </tr>
   <tr>
     <td>B-factor type</td>
-    <td>{{ bdb_metadata["b_type"] if bdb_metadata["b_type"] else "not specified" }}</td>
+    <td>
+      {% if bdb_metadata["b_type"] %}
+        {% if bdb_metadata["b_type"] == "residual" %}
+          likely residual
+        {% else %}
+          {{ bdb_metadata["b_type"] }}
+        {% endif %}
+      {% else %}
+        not specified
+      {% endif %}
+    </td>
   </tr>
   <tr>
     <td> </td>
