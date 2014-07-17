@@ -80,7 +80,7 @@ def generate_tlsanl_log_url(pdb_id):
     """
     tlsanl_log_url = None
     try:
-        if bdb_exists(pdb_id):
+        if tlsanl_log_exists(pdb_id):
             tlsanl_log_url = url_for("tlsanl_log", pdb_id=pdb_id)
     except ValueError as e:
         _log.debug(e)
@@ -139,6 +139,22 @@ def prepare_metadata(dic):
         except (AssertionError, TypeError):
             pass
     return dic
+
+
+def tlsanl_log_exists(pdb_id):
+    """Return True if this the TLSANL log exists.
+
+    pdb_id validation is performed by valid_pdb_id
+    """
+    return os.path.isfile(tlsanl_log_path(pdb_id.lower()))
+
+
+def tlsanl_log_path(pdb_id):
+    """Return the path to this TLSANL log.
+
+    pdb_id validation is performed by valid_pdb_id
+    """
+    return os.path.join(bdb_dir(pdb_id), "tlsanl.log")
 
 
 def valid_pdb_id(pdb_id):
