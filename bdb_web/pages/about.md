@@ -59,6 +59,11 @@ created.
 these table rows show the information on the number of TLS groups or the type
 of B-factor that could be extracted from REMARK 3 records.
 
+**SKTTLS validation summary**: results of TLS model tests after a [TLSANL][5]
+run. Extreme residuals may indicate ADP problems. A detailed explanation is
+given in the [SKTTLS][6] report description and in [this][7] paper about
+validation of TLS models by Zucker, Champ & Merritt (2010).
+
 **B-factor group type**: indicates if the protein and/or nucleic acid chain(s)
 have been refined using a single overall B-factor, one or two B-factors per
 residue, or individual B-factors.
@@ -90,7 +95,7 @@ file.
 
 ### Created by
 Wouter Touw &
-[Gert Vriend][5]
+[Gert Vriend][8]
 
 
 [1]: {{ url_for("pages", name="theory") }}  "Theory"
@@ -98,4 +103,7 @@ Wouter Touw &
 entries"
 [3]: {{ url_for("static", filename="bdb-0.6.3.zip") }} "Source"
 [4]: http://www.wwpdb.org/remediation.html "PDB remediation"
-[5]: http://swift.cmbi.ru.nl/gv
+[5]: http://www.ccp4.ac.uk/html/tlsanl.html "TLSANL"
+[6]: http://www.ccp4.ac.uk/html/tlsanl.html#skttls "SKTTLS"
+[7]: http://dx.doi.org/10.1107/S0907444910020421 "Zucker, Champ & Merritt"
+[8]: http://swift.cmbi.ru.nl/gv
