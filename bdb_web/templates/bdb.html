@@ -10,14 +10,14 @@
 
 {% if bdb_metadata %}
 <h2>
-  <a href="{{ pdb_url }}">{{ bdb_metadata["pdb_id"] }}</a>
+  <a href="{{ bdb_url }}">{{ bdb_metadata["pdb_id"] }}</a>
 </h2>
 <br/>
 <h3>
   {% if bdb_metadata["assume_iso"] %}
-  Full B-factors found in PDB file
+  Full B-factors found in <a href="{{ pdb_url }}">PDB</a> file
   {% else %}
-  Full B-factors calculated from PDB file
+  Full B-factors calculated from <a href="{{ pdb_url }}">PDB</a> file
   {% endif %}
 </h3>
 </br>
