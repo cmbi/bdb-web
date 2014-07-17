@@ -73,6 +73,23 @@ def generate_pdb_url(pdb_id):
     return pdb_url
 
 
+def generate_tlsanl_log_url(pdb_id):
+    """Return a url for downloading the TLSANL log file if it exists, else None.
+
+    pdb_id validation is performed by valid_pdb_id
+    """
+    tlsanl_log_url = None
+    try:
+        if bdb_exists(pdb_id):
+            tlsanl_log_url = url_for("tlsanl_log", pdb_id=pdb_id)
+    except ValueError as e:
+        _log.debug(e)
+    except TypeError as e:
+        _log.error(e)
+
+    return tlsanl_log_url
+
+
 def generate_whynot_url(pdb_id):
     """Return a url to the WHY NOT file for this pdb_id.
 
@@ -83,12 +100,9 @@ def generate_whynot_url(pdb_id):
     """
     whynot_url = None
     try:
-#        pdb_id = valid_pdb_id(pdb_id)
         whynot_url = app.config["WHY_NOT_SEARCH_URL"] + str(pdb_id)
     except TypeError:
         raise TypeError("PDB identifier should be a string")
-#    except ValueError as e:
-#        _log.error(e)
     return whynot_url
 
 

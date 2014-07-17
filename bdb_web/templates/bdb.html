@@ -114,6 +114,16 @@
     <td>Number of bonds beyond 99th percentile for any residual</td>
     <td>{{ bdb_metadata["skttls_99th"] if bdb_metadata["skttls_tot"] else "n/a" }}</td>
   </tr>
+  <tr>
+    <td>Full TLSANL log and SKTTLS report</td>
+    <td>
+      {% if tlsanl_log_url %}
+        <a href="{{ tlsanl_log_url }}">view</a>
+      {% else %}
+        n/a
+      {% endif %}
+    </td>
+  </tr>
 </table>
 <h4>Other B-factor info</h4>
 <table>

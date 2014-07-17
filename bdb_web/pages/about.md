@@ -62,7 +62,7 @@ of B-factor that could be extracted from REMARK 3 records.
 **SKTTLS validation summary**: results of TLS model tests after a [TLSANL][5]
 run. Extreme residuals may indicate ADP problems. A detailed explanation is
 given in the [SKTTLS][6] report description and in [this][7] paper about
-validation of TLS models by Zucker, Champ & Merrit (2010).
+validation of TLS models by Zucker, Champ & Merritt (2010).
 
 **B-factor group type**: indicates if the protein and/or nucleic acid chain(s)
 have been refined using a single overall B-factor, one or two B-factors per
