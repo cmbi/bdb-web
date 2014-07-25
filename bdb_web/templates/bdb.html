@@ -10,14 +10,14 @@
 
 {% if bdb_metadata %}
 <h2>
-  <a href="{{ pdb_url }}">{{ bdb_metadata["pdb_id"] }}</a>
+  <a href="{{ bdb_url }}">{{ bdb_metadata["pdb_id"] }}</a>
 </h2>
 <br/>
 <h3>
   {% if bdb_metadata["assume_iso"] %}
-  Full B-factors found in PDB file
+  Full B-factors found in <a href="{{ pdb_url }}">PDB</a> file
   {% else %}
-  Full B-factors calculated from PDB file
+  Full B-factors calculated from <a href="{{ pdb_url }}">PDB</a> file
   {% endif %}
 </h3>
 </br>
@@ -61,7 +61,17 @@
   </tr>
   <tr>
     <td>B-factor type</td>
-    <td>{{ bdb_metadata["b_type"] if bdb_metadata["b_type"] else "not specified" }}</td>
+    <td>
+      {% if bdb_metadata["b_type"] %}
+        {% if bdb_metadata["b_type"] == "residual" %}
+          likely residual
+        {% else %}
+          {{ bdb_metadata["b_type"] }}
+        {% endif %}
+      {% else %}
+        not specified
+      {% endif %}
+    </td>
   </tr>
   <tr>
     <td> </td>
@@ -83,6 +93,39 @@
     <td>B-factors sum of TLS and residual components</td>
     <td>{{ "yes" if bdb_metadata["tls_sum"] else "not found" }}</td>
   </tr>
+  <tr>
+    <td> </td>
+    <td> </td>
+  </tr>
+  <tr>
+    <th><a href="http://www.ccp4.ac.uk/html/tlsanl.html#skttls">SKTTLS</a>
+      validation summary after <a
+        href="http://www.ccp4.ac.uk/html/tlsanl.html">TLSANL</a> run with PDB
+    file</th>
+    <th> </th>
+  </tr>
+  <tr>
+    <td>Total number of bonds between residues</td>
+    <td>{{ bdb_metadata["skttls_tot"] if bdb_metadata["skttls_tot"] else "n/a" }}</td>
+  </tr>
+  <tr>
+    <td>Number of bonds beyond 95th percentile for any residual</td>
+    <td>{{ bdb_metadata["skttls_95th"] if bdb_metadata["skttls_tot"] else "n/a" }}</td>
+  </tr>
+  <tr>
+    <td>Number of bonds beyond 99th percentile for any residual</td>
+    <td>{{ bdb_metadata["skttls_99th"] if bdb_metadata["skttls_tot"] else "n/a" }}</td>
+  </tr>
+  <tr>
+    <td>Full TLSANL log and SKTTLS report</td>
+    <td>
+      {% if tlsanl_log_url %}
+        <a href="{{ tlsanl_log_url }}">view</a>
+      {% else %}
+        n/a
+      {% endif %}
+    </td>
+  </tr>
 </table>
 <h4>Other B-factor info</h4>
 <table>
@@ -91,7 +134,7 @@
     <th class="column-2"> </th>
   </tr>
   <tr>
-    <td>B-factor field contains U<sup>2</sup> instead of 8&pi;<sup>2</sup>U<sup>2</sup></td>
+    <td>B-factor field contains U-factors (&lt;u<sup>2</sup>&gt; instead of 8&pi;<sup>2</sup>&lt;u<sup>2</sup>&gt;)</td>
     <td>{{ "yes" if bdb_metadata["b_msqav"] else "not found"}}</td>
   </tr>
   <tr>
@@ -154,17 +197,27 @@
   </tr>
 </table>
 <h4>Other refinement remarks</h4>
-<small>{{ bdb_metadata["other_refinement_remarks"] }}</small>
+{% if bdb_metadata["other_refinement_remarks"] == "" %}
+  not specified
+{% else %}
+  <small>
+    {{ bdb_metadata["other_refinement_remarks"] }}
+  </small>
+{% endif %}
 </br>
 </br>
-<h3>PDB Entry Format</h3>
+<h3>PDB Entry Deposition</h3>
 <table>
   <tr>
-    <td class="column-1">Date</td>
-    <td class="column-2">{{ bdb_metadata["format_date"] }}</td>
+    <td class="column-1">Deposition date</td>
+    <td class="column-2">{{ bdb_metadata["dep_date"] }}</td>
   </tr>
   <tr>
-    <td>Version</td>
+    <td>Format date</td>
+    <td>{{ bdb_metadata["format_date"] }}</td>
+  </tr>
+  <tr>
+    <td>Format version</td>
     <td>{{ bdb_metadata["format_vers"] }}</td>
   </tr>
 </table>

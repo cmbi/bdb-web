@@ -10,27 +10,27 @@ from flask_flatpages import pygments_style_defs
 from bdb_web import app, bdb_data, flat_pages, forms
 
 
-
 @app.route("/entry/<pdb_id>/")
 def bdb(pdb_id):
     pdb_id = pdb_id.lower()
     return render_template(
-            "bdb.html",
-            bdb_metadata=bdb_data.parse_bdb_metadata(pdb_id),
-            bdb_url=bdb_data.generate_bdb_url(pdb_id),
-            pdb_url=bdb_data.generate_pdb_url(pdb_id),
-            whynot_url=bdb_data.generate_whynot_url(pdb_id))
+        "bdb.html",
+        bdb_metadata=bdb_data.parse_bdb_metadata(pdb_id),
+        bdb_url=bdb_data.generate_bdb_url(pdb_id),
+        pdb_url=bdb_data.generate_pdb_url(pdb_id),
+        tlsanl_log_url=bdb_data.generate_tlsanl_log_url(pdb_id),
+        whynot_url=bdb_data.generate_whynot_url(pdb_id))
 
 
 @app.route("/download/<pdb_id>/")
 def download(pdb_id):
     pdb_id = pdb_id.lower()
     return send_from_directory(
-            directory=bdb_data.bdb_dir(pdb_id),
-            filename=pdb_id + ".bdb",
-            mimetype="chemical/x-pdb",
-            as_attachment=True,
-            attachment_filename=pdb_id + ".bdb")
+        directory=bdb_data.bdb_dir(pdb_id),
+        filename=pdb_id + ".bdb",
+        mimetype="chemical/x-pdb",
+        as_attachment=True,
+        attachment_filename=pdb_id + ".bdb")
 
 
 @app.route("/")
@@ -44,7 +44,7 @@ def page_not_found(error):
 
 
 @app.errorhandler(500)
-def page_not_found(error):
+def internal_server_error(error):
     return render_template("500.html"), 500
 
 
@@ -66,6 +66,16 @@ def search():
     if not form.validate():
         return (render_template("search.html", form=form))
     return redirect(url_for("bdb", pdb_id=form.name.data))
+
+
+@app.route("/tlsanl_log/<pdb_id>/")
+def tlsanl_log(pdb_id):
+    pdb_id = pdb_id.lower()
+    return send_from_directory(
+        directory=bdb_data.bdb_dir(pdb_id),
+        filename="tlsanl.log",
+        mimetype="text/plain",
+        as_attachment=False)
 
 
 @app.before_request
