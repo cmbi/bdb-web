@@ -206,14 +206,18 @@
 {% endif %}
 </br>
 </br>
-<h3>PDB Entry Format</h3>
+<h3>PDB Entry Deposition</h3>
 <table>
   <tr>
-    <td class="column-1">Date</td>
-    <td class="column-2">{{ bdb_metadata["format_date"] }}</td>
+    <td class="column-1">Deposition date</td>
+    <td class="column-2">{{ bdb_metadata["dep_date"] }}</td>
   </tr>
   <tr>
-    <td>Version</td>
+    <td>Format date</td>
+    <td>{{ bdb_metadata["format_date"] }}</td>
+  </tr>
+  <tr>
+    <td>Format version</td>
     <td>{{ bdb_metadata["format_vers"] }}</td>
   </tr>
 </table>
