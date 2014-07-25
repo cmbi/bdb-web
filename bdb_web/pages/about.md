@@ -101,7 +101,7 @@ Wouter Touw &
 [1]: {{ url_for("pages", name="theory") }}  "Theory"
 [2]: http://www.cmbi.ru.nl/WHY_NOT2/resources/list/BDB_PRESENT "List of all BDB
 entries"
-[3]: {{ url_for("static", filename="bdb-0.6.3.zip") }} "Source"
+[3]: {{ url_for("static", filename="bdb-0.6.5.zip") }} "Source"
 [4]: http://www.wwpdb.org/remediation.html "PDB remediation"
 [5]: http://www.ccp4.ac.uk/html/tlsanl.html "TLSANL"
 [6]: http://www.ccp4.ac.uk/html/tlsanl.html#skttls "SKTTLS"
