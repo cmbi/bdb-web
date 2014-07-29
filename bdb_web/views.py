@@ -2,12 +2,12 @@ import logging
 _log = logging.getLogger("bdb-web")
 
 
-from flask import (g, redirect, request, render_template, send_from_directory,
-                   url_for)
+from flask import (g, redirect, request, render_template,
+                   send_from_directory, url_for)
 from flask_flatpages import pygments_style_defs
 
 
-from bdb_web import app, bdb_data, flat_pages, forms
+from bdb_web import app, bdb_data, b_plot, flat_pages, forms
 
 
 @app.route("/entry/<pdb_id>/")
@@ -20,6 +20,12 @@ def bdb(pdb_id):
         pdb_url=bdb_data.generate_pdb_url(pdb_id),
         tlsanl_log_url=bdb_data.generate_tlsanl_log_url(pdb_id),
         whynot_url=bdb_data.generate_whynot_url(pdb_id))
+
+
+@app.route("/bplot/<pdb_id>.png")
+def bplot(pdb_id):
+    pdb_id = pdb_id.lower()
+    return b_plot.show(pdb_id)
 
 
 @app.route("/download/<pdb_id>/")
@@ -81,3 +87,7 @@ def tlsanl_log(pdb_id):
 @app.before_request
 def before_request():
     g.search_form = forms.SearchForm(request.args)
+
+
+def we_are_running():
+    _log.debug("BDB-web running!")

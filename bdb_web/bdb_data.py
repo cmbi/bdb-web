@@ -129,6 +129,16 @@ def parse_bdb_metadata(pdb_id):
     return metadata
 
 
+def pdb_path(pdb_id, pdb_root=app.config["PDB_ROOT"]):
+    """Return the path to this PDB id.
+
+    pdb_id validation is performed by valid_pdb_id
+    """
+    _log.debug("HALLO")
+    pdb_id = valid_pdb_id(pdb_id)
+    return os.path.join(pdb_root, "pdb{}.ent".format(pdb_id))
+
+
 def prepare_metadata(dic):
     """Collapse all values of this dictionary to strings."""
     for k, v in dic.iteritems():
