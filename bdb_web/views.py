@@ -25,7 +25,11 @@ def bdb(pdb_id):
 @app.route("/bplot/<pdb_id>.png")
 def bplot(pdb_id):
     pdb_id = pdb_id.lower()
-    return b_plot.show(pdb_id)
+    fig = b_plot.show(pdb_id)
+    if not fig:
+        return page_not_found(
+            ValueError('Could not create B-factor plot for {}'.format(pdb_id)))
+    return fig
 
 
 @app.route("/download/<pdb_id>/")

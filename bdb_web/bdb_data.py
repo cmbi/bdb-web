@@ -134,7 +134,6 @@ def pdb_path(pdb_id, pdb_root=app.config["PDB_ROOT"]):
 
     pdb_id validation is performed by valid_pdb_id
     """
-    _log.debug("HALLO")
     pdb_id = valid_pdb_id(pdb_id)
     return os.path.join(pdb_root, "pdb{}.ent".format(pdb_id))
 
