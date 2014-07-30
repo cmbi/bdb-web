@@ -7,15 +7,19 @@ import Bio.PDB
 from bdb_web import bdb_data
 
 
-def get_b_factors(structure):
+def get_b_factors(structure, first_model_only=True):
     """Return the B-factors of this Bio.PDB.Structure as a list of tuples.
+
+    first_model_only returns only the first model (if there are multiple)
+        this prevents overflow errors if a figure has to be created on a
+        matplotlib canvas..
 
     The tuple contains the full id of the atom and its B-factor.
     Return an empty list if the structure does not have atoms.
     """
     b_list = []
 
-    for atom in structure.get_atoms():
+    for atom in structure[0].get_atoms():
         b_list.append((atom.get_full_id(), atom.get_bfactor()))
 
     return b_list
@@ -32,7 +36,7 @@ def create_structure(_id, xyz, verbose=False):
     try:
         p = Bio.PDB.PDBParser(QUIET=not verbose)
         structure = p.get_structure(_id, xyz)
-    except (AttributeError, IndexError, ValueError, AssertionError,
+    except (AttributeError, IndexError, IOError, ValueError, AssertionError,
             Bio.PDB.PDBExceptions.PDBConstructionException) as e:
         # (temporary fix until Biopython parser is fixed)
         _log.error('Biopython Error. {}'.format(e))
