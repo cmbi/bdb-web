@@ -5,13 +5,11 @@ _log = logging.getLogger("bdb-web")
 log_file = "bdb-web.log"
 _file = RotatingFileHandler(log_file, "a", 524288, 5, "UTF-8")
 _log.addHandler(_file)
-_formatter1 = logging.Formatter(
+_formatter = logging.Formatter(
     "%(asctime)s | %(levelname)-7s | %(message)s "
     "[in %(pathname)s:%(lineno)d]")
-_formatter2 = logging.Formatter(
-    "%(message)s")
 _log.setLevel(logging.INFO)
-_file.setFormatter(_formatter1)
+_file.setFormatter(_formatter)
 
 
 from flask import Flask
