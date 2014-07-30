@@ -22,10 +22,21 @@ def bdb(pdb_id):
         whynot_url=bdb_data.generate_whynot_url(pdb_id))
 
 
+@app.route("/bplotca/<pdb_id>.png")
+def bplotca(pdb_id):
+    pdb_id = pdb_id.lower()
+    fig = b_plot.show(pdb_id, ca=True)
+    if not fig:
+        return page_not_found(
+            ValueError('Could not create C-alpha B-factor plot for {}'.format(
+                pdb_id)))
+    return fig
+
+
 @app.route("/bplot/<pdb_id>.png")
 def bplot(pdb_id):
     pdb_id = pdb_id.lower()
-    fig = b_plot.show(pdb_id)
+    fig = b_plot.show(pdb_id, ca=False)
     if not fig:
         return page_not_found(
             ValueError('Could not create B-factor plot for {}'.format(pdb_id)))
