@@ -74,27 +74,21 @@ def show(pdb_id, ca=True):
     ax.set_axisbelow(True)
 
     # PDB B-factors
-    b_fac_p = [b[1] for b in bp]
-    #if ca:
-    #    # only draw ca
-    #    b_fac_p = [b[1] for b in bp if b[0][4][0] == 'CA']
-
+    b_fac_p, b_ind_p = get_xdata(b_list=bp, ca=ca)
     p_line, = ax.plot(b_fac_p, color='grey', ls='-', lw=2)
 
     # BDB B-factors
     if sb:
         bb = get_b_factors(sb)
-        b_fac_b = [b[1] for b in bb]
-     #   if ca:
-     #       # only draw ca
-     #       b_fac_b = [b[1] for b in bb if b[0][4][0] == 'CA']
+        b_fac_b, b_ind_b = get_xdata(b_list=bb, ca=ca)
         b_line, = ax.plot(b_fac_b, color='black', ls='-', lw=2)
         ax.legend(('pdb', 'bdb'))
     else:
         ax.legend('pdb')
 
     # X-axis ticks and labels
-    xt, xtl, xtm = get_xticks(b_list=bp, ca=ca, minor=minor)
+    sub_bp = [bp[i] for i in b_ind_p]
+    xt, xtl, xtm = get_xticks(b_list=sub_bp, ca=ca, minor=minor)
     ax.xaxis.set_ticks(xt)
     ax.xaxis.set_ticklabels(xtl, rotation='vertical')
     if len(xtm) > 0:
@@ -110,40 +104,49 @@ def show(pdb_id, ca=True):
     return response
 
 
-def get_xticks(b_list, ca=True, minor=True):
+def get_xdata(b_list, ca=False):
+    """Return B-factor values to plot and selected indices from b_list."""
+
+    b_inds = []
+    if ca:
+        b_inds = [i for i, b in enumerate(b_list) if b[0][4][0] == 'CA']
+    else:
+        b_inds = np.arange(0, len(b_list))
+
+    b_vals = [b[1] for b in b_list]
+    b_vals = np.take(b_vals, b_inds)
+
+    return b_vals, b_inds
+
+
+def get_xticks(b_list, ca=False, minor=False):
     """Create major ticks and labels and minor tick locations for X-axis.
 
     Full atom ids are used to create tick labels
 
-    If ca and minor are true, return ticks at ca positions
-    If ca and minor are false, return only major ticks at every atom position
-    If ca is true and minor is false, return only major ticks at ca positions
-    If ca is false and minor is true, return major and minor ticks at
-        some atom positions
+    If minor is true, return fewer major and minor ticks
+    If minor is false, return only major ticks at every atom position in b_list
     """
     maj_loc = []
     maj_lab = []
     min_loc = []
+
+    bl = len(b_list)
 
     # Full atom id as x-tick labels
     maj_lab = [''.join((lb[0][2], ''.join(str(l) for l in lb[0][3]),
                ''.join(str(m) for m in lb[0][4]))) for lb in b_list]
 
     # Default major ticks: all atoms
-    maj_loc = np.arange(0, len(b_list))
+    maj_loc = np.arange(0, bl)
     if ca:
-        ca_index = [i for i, a in enumerate(b_list) if a[0][4][0] == 'CA']
-        # The number of major Calpha ticks depends on the total number of cas
-        ca_index_maj = np.arange(0, len(ca_index), 5*int(len(ca_index)/100))
-        ca_index_maj = np.take(ca_index, ca_index_maj)
-        if minor:
-            ca_index_min = np.arange(0, len(ca_index), int(len(ca_index)/100))
-            ca_index_min = np.take(ca_index, ca_index_min)
-            min_loc = np.take(maj_loc, ca_index_min)
-        maj_loc = np.take(maj_loc, ca_index_maj)
+        scale = int(bl/300)
+        maj_loc = np.arange(0, bl, 5*scale if scale > 0 else 1)
+        min_loc = np.arange(0, bl, scale if scale > 0 else 1)
     elif minor:
-        maj_loc = np.arange(0, len(b_list), 2*int(len(b_list)/500))
-        min_loc = np.arange(0, len(b_list), int(len(b_list)/500))
+        scale = int(bl/1000)
+        maj_loc = np.arange(0, bl, 2*scale if scale > 0 else 1)
+        min_loc = np.arange(0, bl, scale if scale > 0 else 1)
 
     maj_lab = np.take(maj_lab, maj_loc)
 
