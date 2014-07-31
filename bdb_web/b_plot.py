@@ -38,10 +38,11 @@ def calc_fig_size(b_num, ca=True):
     return fig_size, downscale
 
 
-def show(pdb_id, ca=True):
+def show(pdb_id, ca=True, norm=False):
     """Create B-factor plots for both BDB and PDB entries.
 
     If ca is false, show a bigger plot with all atoms
+    If norm is true, subtract mean and scale to unit variance
 
     If the pdb_id is invalid return None.
     If both PDB and BDB entries do not exist, return None.
@@ -69,18 +70,19 @@ def show(pdb_id, ca=True):
 
     # Set title, ylabel and grid
     ax.set_title(pdb_id)
-    ax.set_ylabel('B-factor')
+    ylab = 'Normalized B-factor' if norm else 'B-factor'
+    ax.set_ylabel(ylab)
     ax.grid(True)
     ax.set_axisbelow(True)
 
     # PDB B-factors
-    b_fac_p, b_ind_p = get_xdata(b_list=bp, ca=ca)
+    b_fac_p, b_ind_p = get_bdata(b_list=bp, ca=ca, norm=norm)
     p_line, = ax.plot(b_fac_p, color='grey', ls='-', lw=2)
 
     # BDB B-factors
     if sb:
         bb = get_b_factors(sb)
-        b_fac_b, b_ind_b = get_xdata(b_list=bb, ca=ca)
+        b_fac_b, b_ind_b = get_bdata(b_list=bb, ca=ca, norm=norm)
         b_line, = ax.plot(b_fac_b, color='black', ls='-', lw=2)
         ax.legend(('pdb', 'bdb'))
     else:
@@ -104,8 +106,14 @@ def show(pdb_id, ca=True):
     return response
 
 
-def get_xdata(b_list, ca=False):
-    """Return B-factor values to plot and selected indices from b_list."""
+def get_bdata(b_list, ca=False, norm=False):
+    """Return B-factor values to plot and selected indices from b_list.
+
+    Return B-factors for Calpha atoms only if ca is true.
+    Return normalized B-factors if norm=True.
+
+    Normalization now is simply (x - mean(all B))/sd(all B)
+    """
 
     b_inds = []
     if ca:
@@ -115,6 +123,11 @@ def get_xdata(b_list, ca=False):
 
     b_vals = [b[1] for b in b_list]
     b_vals = np.take(b_vals, b_inds)
+
+    if norm:
+        mean = np.mean(b_vals)
+        sd = np.std(b_vals)
+        b_vals = [(b - mean)/sd for b in b_vals]
 
     return b_vals, b_inds
 
