@@ -29,17 +29,18 @@ def create_structure(_id, xyz, verbose=False):
     """Create a Bio.PDB.Structure for the given xyz coordinate file.
 
     Return None if a Structure could not be created.
-    Raise an exception if creation goes wrong.
     """
     structure = None
 
     try:
         p = Bio.PDB.PDBParser(QUIET=not verbose)
         structure = p.get_structure(_id, xyz)
-    except (AttributeError, IndexError, IOError, ValueError, AssertionError,
-            Bio.PDB.PDBExceptions.PDBConstructionException) as e:
+    except IOError as ie:
+        _log.error(ie)
+    except (AttributeError, IndexError, ValueError, AssertionError,
+            Bio.PDB.PDBExceptions.PDBConstructionException) as be:
         # (temporary fix until Biopython parser is fixed)
-        _log.error('Biopython Error. {}'.format(e))
+        _log.error('Biopython Error. {}'.format(be))
 
     return structure
 
