@@ -79,13 +79,13 @@ def show(pdb_id, ca=True, norm=False):
 
     # PDB B-factors
     b_fac_p, b_ind_p = get_bdata(b_list=bp, ca=ca, norm=norm)
-    p_line, = ax.plot(b_fac_p, color='grey', ls='-', lw=2)
+    p_line, = ax.plot(b_fac_p, color='#B98C6A', ls='-', lw=2)
 
     # BDB B-factors
     if sb:
         bb = get_b_factors(sb)
         b_fac_b, b_ind_b = get_bdata(b_list=bb, ca=ca, norm=norm)
-        b_line, = ax.plot(b_fac_b, color='black', ls='-', lw=2)
+        b_line, = ax.plot(b_fac_b, color='#49597C', ls='-', lw=2)
         ax.legend(('pdb', 'bdb'))
     else:
         ax.legend('pdb')
