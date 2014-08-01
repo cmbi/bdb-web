@@ -1,6 +1,7 @@
+from __future__ import division
+
 import logging
 _log = logging.getLogger("bdb-web")
-
 
 import StringIO
 
@@ -65,6 +66,7 @@ def show(pdb_id, ca=True, norm=False):
     fig_size, minor = calc_fig_size(b_num=len(bp), ca=ca)
 
     # Create the figure
+    _log.debug("Creating figure...")
     fig = Figure(figsize=fig_size)
     ax = fig.add_subplot(111)
 
@@ -102,6 +104,8 @@ def show(pdb_id, ca=True, norm=False):
     canvas.print_png(output)
     response = make_response(output.getvalue())
     response.mimetype = "image/png"
+
+    _log.debug("'Uploading' figure...")
 
     return response
 
@@ -144,6 +148,7 @@ def get_xticks(b_list, ca=False, minor=False):
     maj_lab = []
     min_loc = []
 
+    max_ticks = 138
     bl = len(b_list)
 
     # Full atom id as x-tick labels
@@ -153,14 +158,19 @@ def get_xticks(b_list, ca=False, minor=False):
     # Default major ticks: all atoms
     maj_loc = np.arange(0, bl)
     if ca:
-        scale = int(bl/300)
-        maj_loc = np.arange(0, bl, 5*scale if scale > 0 else 1)
-        min_loc = np.arange(0, bl, scale if scale > 0 else 1)
+        # scale to max_ticks
+        scale = bl/max_ticks
+        if scale > 1.0:
+            min_loc = np.unique(np.rint(np.arange(0, bl, scale)))
+            min_loc = min_loc.astype(int)
+            maj_loc = min_loc[0::2]
+
     elif minor:
         scale = int(bl/1000)
         maj_loc = np.arange(0, bl, 2*scale if scale > 0 else 1)
         min_loc = np.arange(0, bl, scale if scale > 0 else 1)
 
     maj_lab = np.take(maj_lab, maj_loc)
+    _log.debug("Plotting {} xlabs".format(len(maj_lab)))
 
     return maj_loc, maj_lab, min_loc
