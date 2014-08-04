@@ -158,6 +158,8 @@ def get_bdata_chain(b_list, ca=False, norm=False):
 
     Normalization now is simply (x - mean(all B))/sd(all B) and is performed for
     all B-factors in b_list.
+
+    If sd is 0, return a list of NaNs
     """
     b_inds = []
     if ca:
@@ -171,7 +173,11 @@ def get_bdata_chain(b_list, ca=False, norm=False):
     if norm:
         mean = np.mean(b_vals)
         sd = np.std(b_vals)
-        b_vals = [(b - mean)/sd for b in b_vals]
+        if sd > 0:
+            b_vals = [(b - mean)/sd for b in b_vals]
+        else:
+            b_vals = np.empty(len(b_vals))
+            b_vals[:] = np.nan
 
     return b_vals, np.array(b_inds)
 
