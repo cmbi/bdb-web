@@ -230,6 +230,18 @@ Not found
 </br>
 </br>
 </br>
+<h2>PDB and BDB B-factor plots</h2>
+<a href="{{ url_for("bplot_ca", pdb_id=bdb_metadata["pdb_id"]) }}">
+  C&alpha; atoms</a>
+</br>
+<a href="{{ url_for("bplot_ca_norm", pdb_id=bdb_metadata["pdb_id"]) }}">
+  C&alpha; atoms, B-values normalized per chain</a>
+</br>
+<a href="{{ url_for("bplot", pdb_id=bdb_metadata["pdb_id"]) }}">
+  All atoms</a>
+</br>
+</br>
+</br>
 <h2>Links</h2>
 
 <span>BDB file:</span>

@@ -5,17 +5,15 @@ _log = logging.getLogger("bdb-web")
 log_file = "bdb-web.log"
 _file = RotatingFileHandler(log_file, "a", 524288, 5, "UTF-8")
 _log.addHandler(_file)
-_formatter1 = logging.Formatter(
-        "%(asctime)s | %(levelname)-7s | %(message)s "
-        "[in %(pathname)s:%(lineno)d]")
-_formatter2 = logging.Formatter(
-        "%(message)s")
+_formatter = logging.Formatter(
+    "%(asctime)s | %(levelname)-7s | %(message)s "
+    "[in %(pathname)s:%(lineno)d]")
 _log.setLevel(logging.INFO)
-_file.setFormatter(_formatter1)
+_file.setFormatter(_formatter)
 
 
 from flask import Flask
-from flask_flatpages import FlatPages, pygments_style_defs
+from flask_flatpages import FlatPages
 from flask_flatpages_pandoc import FlatPagesPandoc
 
 
@@ -50,9 +48,13 @@ if not app.debug:
 
     %(message)s
     """))
+else:
+    _log.setLevel(logging.DEBUG)
 
 flat_pages = FlatPages(app)
 FlatPagesPandoc("markdown", app, ["--mathjax", "-s"], pre_render=True)
 
 
 import bdb_web.views
+if app.debug:
+    bdb_web.views.we_are_running()
