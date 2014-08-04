@@ -90,7 +90,7 @@ def show(pdb_id, ca=True, norm=False):
         b_line, = ax.plot(b_fac_blot, color='#49597C', ls='-', lw=2)
         ax.legend(('pdb', 'bdb'))
     else:
-        ax.legend('pdb')
+        ax.legend(('pdb'))
 
     # Collapse the labels and indices
     # sub_bp = [bp[i] for i in b_ind_p]
