@@ -7,22 +7,35 @@ import Bio.PDB
 from bdb_web import bdb_data
 
 
-def get_b_factors(structure, first_model_only=True):
-    """Return the B-factors of this Bio.PDB.Structure as a list of tuples.
+def get_b_factors(structure, first_model_only=True, ca=False, norm=False):
+    """Get the B-factor values of this Bio.PDB.Structure.
+
+    Return a list with for each chain a list of tuples.
+    A tuple contains the full id of the atom and its B-factor.
+    Also return the total number of B-factors in the nested list
 
     first_model_only returns only the first model (if there are multiple)
         this prevents overflow errors if a figure has to be created on a
         matplotlib canvas..
 
-    The tuple contains the full id of the atom and its B-factor.
+    Return B-factors for Calpha atoms only if ca is true.
+
+    Return normalized B-factors if norm=True.
+    Normalization now is simply (x - mean(all B))/sd(all B) and is performed
+        separately for each chain
+
     Return an empty list if the structure does not have atoms.
     """
-    b_list = []
+    c_list = []
+    b_num = 0
 
-    for atom in structure[0].get_atoms():
-        b_list.append((atom.get_full_id(), atom.get_bfactor()))
-
-    return b_list
+    for chain in structure[0]:
+        b_list = []
+        for atom in chain.get_atoms():
+            b_list.append((atom.get_full_id(), atom.get_bfactor()))
+            b_num = b_num + 1
+        c_list.append(b_list)
+    return c_list, b_num
 
 
 def create_structure(_id, xyz, verbose=False):

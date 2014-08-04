@@ -59,11 +59,11 @@ def show(pdb_id, ca=True, norm=False):
     sb = get_structure(pdb_id, "bdb")
 
     # PDB
-    # Get a list of (full atom id, B-factor) tuples
-    bp = get_b_factors(sp)
+    # Get a list of (full atom id, B-factor) tuples per chain
+    bp, b_num = get_b_factors(sp)
 
     # Calculate figure size
-    fig_size, minor = calc_fig_size(b_num=len(bp), ca=ca)
+    fig_size, minor = calc_fig_size(b_num=b_num, ca=ca)
 
     # Create the figure
     _log.debug("Creating figure...")
@@ -78,20 +78,28 @@ def show(pdb_id, ca=True, norm=False):
     ax.set_axisbelow(True)
 
     # PDB B-factors
-    b_fac_p, b_ind_p = get_bdata(b_list=bp, ca=ca, norm=norm)
-    p_line, = ax.plot(b_fac_p, color='#B98C6A', ls='-', lw=2)
+    b_fac_p, b_ind_p = get_bdata(chain_list=bp, ca=ca, norm=norm)
+    b_fac_plot = [item for sublist in b_fac_p for item in sublist]
+    p_line, = ax.plot(b_fac_plot, color='#B98C6A', ls='-', lw=2)
 
     # BDB B-factors
     if sb:
-        bb = get_b_factors(sb)
-        b_fac_b, b_ind_b = get_bdata(b_list=bb, ca=ca, norm=norm)
-        b_line, = ax.plot(b_fac_b, color='#49597C', ls='-', lw=2)
+        bb, b_num = get_b_factors(sb)
+        b_fac_b, b_ind_b = get_bdata(chain_list=bb, ca=ca, norm=norm)
+        b_fac_blot = [item for sublist in b_fac_b for item in sublist]
+        b_line, = ax.plot(b_fac_blot, color='#49597C', ls='-', lw=2)
         ax.legend(('pdb', 'bdb'))
     else:
         ax.legend('pdb')
 
+    # Collapse the labels and indices
+    # sub_bp = [bp[i] for i in b_ind_p]
+    sub_bp = []
+    for i, chain in enumerate(bp):
+        for j in b_ind_p[i]:
+            sub_bp.append(chain[j])
+
     # X-axis ticks and labels
-    sub_bp = [bp[i] for i in b_ind_p]
     xt, xtl, xtm = get_xticks(b_list=sub_bp, ca=ca, minor=minor)
     ax.xaxis.set_ticks(xt)
     ax.xaxis.set_ticklabels(xtl, rotation='vertical')
@@ -110,15 +118,47 @@ def show(pdb_id, ca=True, norm=False):
     return response
 
 
-def get_bdata(b_list, ca=False, norm=False):
+def get_bdata(chain_list, ca=False, norm=False):
     """Return B-factor values to plot and selected indices from b_list.
+    Both lists are numpy arrays.
+
+    Return B-factors for Calpha atoms only if ca is true.
+    Return normalized B-factors if norm=True.
+    The indices are also chain-specific
+
+    Normalization now is simply (x - mean(all B))/sd(all B) and is performed
+    chain-wise for the B-factors in chain_list.
+    """
+    b_inds = []
+    b_vals = []
+
+    # Keep track of position in structure
+    # pos = 0
+    for chain in chain_list:
+        # Get the values and indices for each chain
+        val, ind = get_bdata_chain(b_list=chain, ca=ca, norm=norm)
+
+        # Shift the indices
+        # ind = ind + pos
+        b_inds.append(ind)
+        # pos = pos + len(chain)
+
+        # Values
+        b_vals.append(val)
+
+    return b_vals, b_inds
+
+
+def get_bdata_chain(b_list, ca=False, norm=False):
+    """Return B-factor values to plot and selected indices from b_list.
+    Both lists are numpy arrays.
 
     Return B-factors for Calpha atoms only if ca is true.
     Return normalized B-factors if norm=True.
 
-    Normalization now is simply (x - mean(all B))/sd(all B)
+    Normalization now is simply (x - mean(all B))/sd(all B) and is performed for
+    all B-factors in b_list.
     """
-
     b_inds = []
     if ca:
         b_inds = [i for i, b in enumerate(b_list) if b[0][4][0] == 'CA']
@@ -133,7 +173,7 @@ def get_bdata(b_list, ca=False, norm=False):
         sd = np.std(b_vals)
         b_vals = [(b - mean)/sd for b in b_vals]
 
-    return b_vals, b_inds
+    return b_vals, np.array(b_inds)
 
 
 def get_xticks(b_list, ca=False, minor=False):
