@@ -1,4 +1,4 @@
-# Flask settings for version 0.1.6
+# Flask settings for version 0.1.7
 BDB_ROOT = "bdb"
 MAIL_SERVER = "127.0.0.1"
 MAIL_SMTP_PORT = 25
