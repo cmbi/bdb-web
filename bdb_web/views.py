@@ -25,9 +25,12 @@ def bdb(pdb_id):
 @app.route("/bplot_ca/<pdb_id>.png")
 def bplot_ca(pdb_id):
     pdb_id = pdb_id.lower()
-    fig = b_plot.show(pdb_id, ca=True)
+    try:
+        fig = b_plot.show(pdb_id, ca=True)
+    except ValueError as e:
+        return page_not_found_feedback(e)
     if not fig:
-        return page_not_found(
+        return page_not_found_feedback(
             ValueError('Could not create C-alpha B-factor plot for {}'.format(
                 pdb_id)))
     return fig
@@ -36,9 +39,12 @@ def bplot_ca(pdb_id):
 @app.route("/bplot_ca_norm/<pdb_id>.png")
 def bplot_ca_norm(pdb_id):
     pdb_id = pdb_id.lower()
-    fig = b_plot.show(pdb_id, ca=True, norm=True)
+    try:
+        fig = b_plot.show(pdb_id, ca=True, norm=True)
+    except ValueError as e:
+        return page_not_found_feedback(e)
     if not fig:
-        return page_not_found(
+        return page_not_found_feedback(
             ValueError('Could not create normalized C-alpha'
                        'B-factor plot for {}'.format(pdb_id)))
     return fig
@@ -47,9 +53,12 @@ def bplot_ca_norm(pdb_id):
 @app.route("/bplot/<pdb_id>.png")
 def bplot(pdb_id):
     pdb_id = pdb_id.lower()
-    fig = b_plot.show(pdb_id, ca=False)
+    try:
+        fig = b_plot.show(pdb_id, ca=False)
+    except ValueError as e:
+        return page_not_found_feedback(e)
     if not fig:
-        return page_not_found(
+        return page_not_found_feedback(
             ValueError('Could not create B-factor plot for {}'.format(pdb_id)))
     return fig
 
@@ -57,12 +66,15 @@ def bplot(pdb_id):
 @app.route("/download/<pdb_id>/")
 def download(pdb_id):
     pdb_id = pdb_id.lower()
-    return send_from_directory(
-        directory=bdb_data.bdb_dir(pdb_id),
-        filename=pdb_id + ".bdb",
-        mimetype="chemical/x-pdb",
-        as_attachment=True,
-        attachment_filename=pdb_id + ".bdb")
+    try:
+        return send_from_directory(
+            directory=bdb_data.bdb_dir(pdb_id),
+            filename=pdb_id + ".bdb",
+            mimetype="chemical/x-pdb",
+            as_attachment=True,
+            attachment_filename=pdb_id + ".bdb")
+    except ValueError as e:
+        return page_not_found_feedback(e)
 
 
 @app.route("/")
@@ -73,6 +85,10 @@ def index():
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template("404.html"), 404
+
+
+def page_not_found_feedback(error):
+    return render_template("404.html", message=error), 404
 
 
 @app.errorhandler(500)
@@ -103,11 +119,14 @@ def search():
 @app.route("/tlsanl_log/<pdb_id>/")
 def tlsanl_log(pdb_id):
     pdb_id = pdb_id.lower()
-    return send_from_directory(
-        directory=bdb_data.bdb_dir(pdb_id),
-        filename="tlsanl.log",
-        mimetype="text/plain",
-        as_attachment=False)
+    try:
+        return send_from_directory(
+            directory=bdb_data.bdb_dir(pdb_id),
+            filename="tlsanl.log",
+            mimetype="text/plain",
+            as_attachment=False)
+    except ValueError as e:
+        return page_not_found(e)
 
 
 @app.before_request
