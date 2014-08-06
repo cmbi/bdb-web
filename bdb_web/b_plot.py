@@ -16,7 +16,7 @@ import numpy as np
 from bdb_web.structure import get_b_factors, get_structure
 
 
-def calc_fig_size(b_num, ca=True):
+def calc_fig_size(b_num, ca=True, dpi=80, w_pad=10):
     """Calculate figure size.
 
     If Calpha, return standard figure size, otherwise take number of B-factors
@@ -30,10 +30,11 @@ def calc_fig_size(b_num, ca=True):
 
     if not ca:
         fig_size = (b_num*0.2, 12)
-        if fig_size[0] > 2417:
+        _log.debug("Figure width: {}".format(fig_size[0]))
+        if fig_size[0] > (32720/dpi - 2*w_pad):
             _log.debug("Figure width ({}) too large. Setting max width".
                        format(fig_size[0]))
-            fig_size = (409, 12)
+            fig_size = (32000/dpi - 2*w_pad, 12)
             downscale = True
 
     return fig_size, downscale
@@ -63,15 +64,18 @@ def show(pdb_id, ca=True, norm=False):
     bp, b_num = get_b_factors(sp)
 
     # Calculate figure size
-    fig_size, minor = calc_fig_size(b_num=b_num, ca=ca)
+    dpi = 80
+    w_pad = 10
+    fig_size, minor = calc_fig_size(b_num=b_num, ca=ca, dpi=dpi, w_pad=w_pad)
 
     # Create the figure
     _log.debug("Creating figure...")
-    fig = Figure(figsize=fig_size)
+    fig = Figure(figsize=fig_size, dpi=dpi)
     ax = fig.add_subplot(111)
+    fig.tight_layout(pad=w_pad)
 
     # Set title, ylabel and grid
-    ax.set_title(pdb_id)
+    ax.set_title(pdb_id, fontsize=20)
     ylab = 'Normalized B-factor' if norm else 'B-factor'
     ax.set_ylabel(ylab)
     ax.grid(True)
@@ -81,6 +85,7 @@ def show(pdb_id, ca=True, norm=False):
     b_fac_p, b_ind_p = get_bdata(chain_list=bp, ca=ca, norm=norm)
     b_fac_plot = [item for sublist in b_fac_p for item in sublist]
     p_line, = ax.plot(b_fac_plot, color='#B98C6A', ls='-', lw=2)
+    ax.set_xlim(0, len(b_fac_plot))
 
     # BDB B-factors
     if sb:
