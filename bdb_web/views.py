@@ -126,7 +126,7 @@ def tlsanl_log(pdb_id):
             mimetype="text/plain",
             as_attachment=False)
     except ValueError as e:
-        return page_not_found(e)
+        return page_not_found_feedback(e)
 
 
 @app.before_request
