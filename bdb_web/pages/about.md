@@ -7,11 +7,24 @@ isotropic B-factors.
 
 
 ### <a name="motivation"></a>Motivation
-If protein engineers, homology modellers, biologists, or bioinformaticians need
-B-factors from a PDB file, they normally want full isotropic B-factors.
-Normally it is indeed the full B-factor that is stored in the B-factor field
-in the ATOM records of a PDB file. However, sometimes the field contains
-"residual" B-factors or atomic mean-square displacements instead of B-factors.
+Protein engineers, homology modellers, biologists, crystallographers and
+bioinformaticians frequently analyze B-factors in PDB structures because
+B-factors are a measure of mobility. Normally full B-factors are stored in
+the [B-factor field in the ATOM records][1] of a PDB file. However, in about
+10% of the X-ray PDB files the B-factor field represents different quantities.
+For example, ["residual" B-factors][2] without the isotropic TLS contribution
+can be present, atomic [mean-square displacements][1] instead of B-factors
+have been deposited, or [sometimes][3] the anisotropic overall scale has not
+been included in the B-factors.
+In general, this leads to lower B-factors
+than the B-factors reported for the majority of the PDB files. Furthermore, the
+location of apparent (normalized) B-factor maxima in a chain might be different
+and might even shift to a different secondary structure element of a different
+secondary structure type when full (estimates of) isotropic B-factors instead
+of residual B-factors are considered.
+Therefore, the different representations of disorder may influence both large
+and small scale analyses of B-factors. The BDB aims to present a more
+consistent B-factor representation.
 The BDB contains PDB files with full isotropic B-factors in the
 B-factor field if the original PDB file contains enough information to
 determine the content of the B-factor field and calculate the full B-factor
@@ -32,12 +45,12 @@ the search box. The entire databank can be downloaded via `rsync`:
 
 `rsync -avz rsync://rsync.cmbi.ru.nl/bdb/??/????/????.bdb my-bdb/`
 
-A list of all BDB entries is available [here][2].
+A list of all BDB entries is available [here][4].
 
 </br>
 
 ### <a name="source"></a>Source code
-The source code for generating BDB files from PDB files is available [here][3].
+The source code for generating BDB files from PDB files is available [here][5].
 
 </br>
 
@@ -49,7 +62,7 @@ Entry Format sections. The refinement section is subdivided in software,
 TLS-related info, other B-factor info and other refinement remarks.
 
 **B-factor type according to PDB remediation**: in 2011 several problems were
-[remediated][4] by the PDB. The
+[remediated][6] by the PDB. The
 remediations included fixing TLS group definitions and determining whether the
 B-factor type in the PDB file is likely to be residual or not. If the B-factor
 type could not be verified according to the remediation a BDB file has not been
@@ -59,9 +72,9 @@ created.
 these table rows show the information on the number of TLS groups or the type
 of B-factor that could be extracted from REMARK 3 records.
 
-**SKTTLS validation summary**: results of TLS model tests after a [TLSANL][5]
+**SKTTLS validation summary**: results of TLS model tests after a [TLSANL][7]
 run. Extreme residuals may indicate ADP problems. A detailed explanation is
-given in the [SKTTLS][6] report description and in [this][7] paper about
+given in the [SKTTLS][8] report description and in [this][9] paper about
 validation of TLS models by Zucker, Champ & Merritt (2010).
 
 **B-factor group type**: indicates if the protein and/or nucleic acid chain(s)
@@ -95,15 +108,18 @@ file.
 
 ### Created by
 Wouter Touw &
-[Gert Vriend][8]
+[Gert Vriend][10]
 
 
 [1]: {{ url_for("pages", name="theory") }}  "Theory"
-[2]: http://www.cmbi.ru.nl/WHY_NOT2/resources/list/BDB_PRESENT "List of all BDB
+[2]: http://dx.doi.org/10.1107/S0907444900014736 "Winn, Isupov & Murshudov"
+[3]: http://phenix-online.org/pipermail/phenixbb/2012-August/018927.html
+"overall anisotropic scale"
+[4]: http://www.cmbi.ru.nl/WHY_NOT2/resources/list/BDB_PRESENT "List of all BDB
 entries"
-[3]: {{ url_for("static", filename="bdb-0.6.5.zip") }} "Source"
-[4]: http://www.wwpdb.org/remediation.html "PDB remediation"
-[5]: http://www.ccp4.ac.uk/html/tlsanl.html "TLSANL"
-[6]: http://www.ccp4.ac.uk/html/tlsanl.html#skttls "SKTTLS"
-[7]: http://dx.doi.org/10.1107/S0907444910020421 "Zucker, Champ & Merritt"
-[8]: http://swift.cmbi.ru.nl/gv
+[5]: {{ url_for("static", filename="bdb-0.6.5.zip") }} "Source"
+[6]: http://www.wwpdb.org/remediation.html "PDB remediation"
+[7]: http://www.ccp4.ac.uk/html/tlsanl.html "TLSANL"
+[8]: http://www.ccp4.ac.uk/html/tlsanl.html#skttls "SKTTLS"
+[9]: http://dx.doi.org/10.1107/S0907444910020421 "Zucker, Champ & Merritt"
+[10]: http://swift.cmbi.ru.nl/gv "Gert Vriend"

@@ -31,7 +31,7 @@ def bplot_ca(pdb_id):
         return page_not_found_feedback(e)
     if not fig:
         return page_not_found_feedback(
-            ValueError('Could not create C-alpha B-factor plot for {}'.format(
+            ValueError("Could not create C-alpha B-factor plot for {}".format(
                 pdb_id)))
     return fig
 
@@ -45,8 +45,8 @@ def bplot_ca_norm(pdb_id):
         return page_not_found_feedback(e)
     if not fig:
         return page_not_found_feedback(
-            ValueError('Could not create normalized C-alpha'
-                       'B-factor plot for {}'.format(pdb_id)))
+            ValueError("Could not create normalized C-alpha"
+                       "B-factor plot for {}".format(pdb_id)))
     return fig
 
 
@@ -59,7 +59,7 @@ def bplot(pdb_id):
         return page_not_found_feedback(e)
     if not fig:
         return page_not_found_feedback(
-            ValueError('Could not create B-factor plot for {}'.format(pdb_id)))
+            ValueError("Could not create B-factor plot for {}".format(pdb_id)))
     return fig
 
 
