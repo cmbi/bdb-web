@@ -129,7 +129,7 @@ and are not of relevance for the BDB. You find information about these
 artefacts in other PDB-facilities.
 Alternate locations are most often seen for amino acid side chains when these
 can have multiple rotamers that are energetically similarly favourable.
-If this is observed in the crystal, then you will find side multiple chain
+If this is observed in the crystal, then you will find multiple side chain
 atoms with alternate location indicators A, B, etc. The occupancies normally
 add up to unity ([Figure 3][11]). If no alternates have been observed, the
 occupancy simply equals 1.00 (e.g. [Figure 1][3], [Figure 2][6])
@@ -159,6 +159,7 @@ B-factors.
 
 
 [1]: http://www.iucr.org/resources/commissions/crystallographic-nomenclature/adp
+     "Atomic displacement parameter nomenclature"
 [2]: http://www.wwpdb.org/documentation/format33/sect9.html#ATOM "ATOM records"
 [3]: #fig1 "Figure 1"
 [4]: http://www.rcsb.org/pdb/explore/explore.do?structureId=1crn "1crn"

@@ -53,12 +53,12 @@ def create_structure(_id, xyz, verbose=False):
     except (AttributeError, IndexError, ValueError, AssertionError,
             Bio.PDB.PDBExceptions.PDBConstructionException) as be:
         # (temporary fix until Biopython parser is fixed)
-        _log.error('Biopython Error. {}'.format(be))
+        _log.error("Biopython Error. {}".format(be))
 
     return structure
 
 
-def get_structure(_id, db='pdb', verbose=False):
+def get_structure(_id, db="pdb", verbose=False):
     """Return a Bio.PDB.Structure for the given xyz coordinate file.
 
     Return None if a Structure could not be created.
@@ -66,11 +66,11 @@ def get_structure(_id, db='pdb', verbose=False):
     """
     structure = None
 
-    if db == 'pdb':
+    if db == "pdb":
         xyz = bdb_data.pdb_path(_id)
-    elif db == 'bdb':
+    elif db == "bdb":
         xyz = bdb_data.bdb_path(_id)
-    _log.info('Loading {}...'.format(xyz))
+    _log.info("Loading {}...".format(xyz))
 
     structure = create_structure(_id, xyz)
     return structure

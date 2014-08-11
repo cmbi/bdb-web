@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-  {{ 'BDB' }}
+  {{ "BDB" }}
 {% endblock %}
 
 {% block content %}
@@ -224,9 +224,6 @@
 </br>
 <h3>Interpretation</h3>
 {{ bdb_metadata["decision"] }}
-{% else %}
-Not found
-{% endif %}
 </br>
 </br>
 </br>
@@ -239,6 +236,9 @@ Not found
 </br>
 <a href="{{ url_for("bplot", pdb_id=bdb_metadata["pdb_id"]) }}">
   All atoms</a>
+{% else %}
+Not found
+{% endif %}
 </br>
 </br>
 </br>

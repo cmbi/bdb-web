@@ -76,7 +76,7 @@ def show(pdb_id, ca=True, norm=False):
 
     # Set title, ylabel and grid
     ax.set_title(pdb_id, fontsize=20)
-    ylab = 'Normalized B-factor' if norm else 'B-factor'
+    ylab = "Normalized B-factor" if norm else "B-factor"
     ax.set_ylabel(ylab)
     ax.grid(True)
     ax.set_axisbelow(True)
@@ -84,7 +84,7 @@ def show(pdb_id, ca=True, norm=False):
     # PDB B-factors
     b_fac_p, b_ind_p = get_bdata(chain_list=bp, ca=ca, norm=norm)
     b_fac_plot = [item for sublist in b_fac_p for item in sublist]
-    p_line, = ax.plot(b_fac_plot, color='#B98C6A', ls='-', lw=2)
+    p_line, = ax.plot(b_fac_plot, color="#B98C6A", ls="-", lw=2)
     ax.set_xlim(0, len(b_fac_plot))
 
     # BDB B-factors
@@ -92,10 +92,10 @@ def show(pdb_id, ca=True, norm=False):
         bb, b_num = get_b_factors(sb)
         b_fac_b, b_ind_b = get_bdata(chain_list=bb, ca=ca, norm=norm)
         b_fac_blot = [item for sublist in b_fac_b for item in sublist]
-        b_line, = ax.plot(b_fac_blot, color='#49597C', ls='-', lw=2)
-        ax.legend(('pdb', 'bdb'))
+        b_line, = ax.plot(b_fac_blot, color="#49597C", ls="-", lw=2)
+        ax.legend(("pdb", "bdb"))
     else:
-        ax.legend(('pdb'))
+        ax.legend(("pdb"))
 
     # Collapse the labels and indices
     # sub_bp = [bp[i] for i in b_ind_p]
@@ -107,7 +107,7 @@ def show(pdb_id, ca=True, norm=False):
     # X-axis ticks and labels
     xt, xtl, xtm = get_xticks(b_list=sub_bp, ca=ca, minor=minor)
     ax.xaxis.set_ticks(xt)
-    ax.xaxis.set_ticklabels(xtl, rotation='vertical')
+    ax.xaxis.set_ticklabels(xtl, rotation="vertical")
     if len(xtm) > 0:
         ax.xaxis.set_ticks(xtm, minor=True)
 
@@ -168,7 +168,7 @@ def get_bdata_chain(b_list, ca=False, norm=False):
     """
     b_inds = []
     if ca:
-        b_inds = [i for i, b in enumerate(b_list) if b[0][4][0] == 'CA']
+        b_inds = [i for i, b in enumerate(b_list) if b[0][4][0] == "CA"]
     else:
         b_inds = np.arange(0, len(b_list))
 
@@ -203,8 +203,8 @@ def get_xticks(b_list, ca=False, minor=False):
     bl = len(b_list)
 
     # Full atom id as x-tick labels
-    maj_lab = [''.join((lb[0][2], ''.join(str(l) for l in lb[0][3]),
-               ''.join(str(m) for m in lb[0][4]))) for lb in b_list]
+    maj_lab = ["".join((lb[0][2], "".join(str(l) for l in lb[0][3]),
+               "".join(str(m) for m in lb[0][4]))) for lb in b_list]
 
     # Default major ticks: all atoms
     maj_loc = np.arange(0, bl)
