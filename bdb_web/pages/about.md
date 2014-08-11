@@ -34,7 +34,7 @@ if necessary.
 If you use BDB entries, please cite:
 
 Wouter G. Touw & Gert Vriend,
-*"BDB - a databank of PDB files with full isotropic B-factors."* (2014)
+*"BDB: Databank of PDB files with consistent B-factors"* (2014)
 **Submitted**
 
 </br>
