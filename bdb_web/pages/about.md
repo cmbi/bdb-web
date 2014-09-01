@@ -12,13 +12,13 @@ bioinformaticians frequently analyze B-factors in PDB structures because
 B-factors are a measure of mobility. Normally full B-factors are stored in
 the [B-factor field in the ATOM records][1] of a PDB file. However, in about
 10% of the X-ray PDB files the B-factor field represents different quantities.
-For example, ["residual" B-factors][2] without the isotropic TLS contribution
-can be present, atomic [mean-square displacements][1] instead of B-factors
-have been deposited, or [sometimes][3] the anisotropic overall scale has not
-been included in the B-factors.
-In general, this leads to lower B-factors
-than the B-factors reported for the majority of the PDB files. Furthermore, the
-location of apparent (normalized) B-factor maxima in a chain might be different
+For example, ["residual" B-factors][2] without the
+[isotropic TLS contribution][3] can be present, atomic
+[mean-square displacements][1] instead of B-factors have been deposited,
+or sometimes the [anisotropic overall scale][3] has not been included in the
+B-factors. In general, this leads to lower B-factors than the B-factors
+reported for the majority of the PDB files. Furthermore, the location of
+apparent (normalized) B-factor maxima in a chain might be different
 and might even shift to a different secondary structure element of a different
 secondary structure type when full (estimates of) isotropic B-factors instead
 of residual B-factors are considered.
@@ -113,8 +113,7 @@ Wouter Touw &
 
 [1]: {{ url_for("pages", name="theory") }}  "Theory"
 [2]: http://dx.doi.org/10.1107/S0907444900014736 "Winn, Isupov & Murshudov"
-[3]: http://phenix-online.org/pipermail/phenixbb/2012-August/018927.html
-"overall anisotropic scale"
+[3]: {{ url_for("pages", name="tls_background") }} "TLS background"
 [4]: http://www.cmbi.ru.nl/WHY_NOT2/resources/list/BDB_PRESENT "List of all BDB
 entries"
 [5]: {{ url_for("static", filename="bdb-0.6.5.zip") }} "Source"
