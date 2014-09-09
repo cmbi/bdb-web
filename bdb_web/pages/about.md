@@ -35,7 +35,8 @@ If you use BDB entries, please cite:
 
 Wouter G. Touw & Gert Vriend,
 *"BDB: Databank of PDB files with consistent B-factors"* (2014)
-**Submitted**
+Protein Engineering, Design and Selection (PEDS)
+**Accepted**
 
 </br>
 
