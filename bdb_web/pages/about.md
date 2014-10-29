@@ -35,8 +35,8 @@ If you use BDB entries, please cite:
 
 Wouter G. Touw & Gert Vriend,
 *"BDB: Databank of PDB files with consistent B-factors"* (2014)
-Protein Engineering, Design and Selection (PEDS)
-**Accepted**
+Protein Engineering, Design and Selection (PEDS) 27 (11): 457-462.
+[doi: 10.1093/protein/gzu044][11]
 
 </br>
 
@@ -123,3 +123,4 @@ entries"
 [8]: http://www.ccp4.ac.uk/html/tlsanl.html#skttls "SKTTLS"
 [9]: http://dx.doi.org/10.1107/S0907444910020421 "Zucker, Champ & Merritt"
 [10]: http://swift.cmbi.ru.nl/gv "Gert Vriend"
+[11]: http://dx.doi.org/10.1093/protein/gzu044 "BDB article"
