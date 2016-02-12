@@ -21,4 +21,4 @@ following from the project root folder:
 To run the Docker container, you need a data directory with two subdirectories
 called 'bdb' and 'pdb', containing all the data files. An example:
 
-    run -v /home/cbaakman/projects/bdb-web:/app -v /mnt/cmbi4:/data -p 16000:16000 -it bdb-web
+    docker run -v /home/cbaakman/projects/bdb-web:/app -v /mnt/cmbi4:/data -p 16000:16000 -it bdb-web
