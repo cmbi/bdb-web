@@ -14,4 +14,4 @@ COPY . /app
 EXPOSE 16000
 ENV BDB_WEB_SETTINGS /app/config/settings.example
 
-CMD ["gunicorn", "-k", "gevent", "-b", "0.0.0.0:16000", "--debug", "bdb_web:app"]
+CMD ["gunicorn", "-k", "gevent", "-b", "0.0.0.0:16000", "bdb_web:app"]
