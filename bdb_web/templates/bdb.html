@@ -94,6 +94,18 @@
     <td>{{ bdb_metadata["tls_groups"] if bdb_metadata["tls_groups"] else "not specified" }}</td>
   </tr>
   <tr>
+    <td>Valid residue selection in all TLS groups</td>
+    <td>
+      {% if bdb_metadata["tls_valid"] is none %}
+      n/a
+      {% elif bdb_metadata["tls_valid"] %}
+      yes
+      {% else %}
+      no
+      {% endif %}
+    </td>
+  </tr>
+  <tr>
     <td>B-factors residual</td>
     <td>{{ "yes" if bdb_metadata["tls_residual"] else "not found" }}</td>
   </tr>
