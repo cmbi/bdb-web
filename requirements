@@ -1,4 +1,4 @@
-biopython>=1.64
+biopython>=1.66
 Fabric>=1.8.3
 Flask>=0.10.1
 Flask-FlatPages>=0.5
