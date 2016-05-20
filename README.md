@@ -20,9 +20,10 @@ Copy `settings.example` in the `config` directory to e.g.
 BDB web comes with a Docker file. To build the Docker image, run the
 following from the project root folder:
 
-    build -t bdb-web .
+    docker build -t bdb-web .
 
 To run the Docker container, you need a data directory with two subdirectories
-called 'bdb' and 'pdb', containing all the data files. An example:
+called 'bdb' and 'pdb', containing all the data files. (Adjust the
+configuration file accordingly). An example:
 
-    docker run -v /home/cbaakman/projects/bdb-web:/app -v /mnt/cmbi4:/data -p 16000:16000 -it bdb-web
+    docker run -v /path/to/bdb-web:/app -v /host:/data -p 16000:16000 -it bdb-web
