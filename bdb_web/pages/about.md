@@ -51,7 +51,8 @@ A list of all BDB entries is available [here][4].
 </br>
 
 ### <a name="source"></a>Source code
-The source code for generating BDB files from PDB files is available [here][5].
+The source code for generating BDB files from PDB files is available on
+[GitHub][5].
 
 </br>
 
@@ -117,7 +118,7 @@ Wouter Touw &
 [3]: {{ url_for("pages", name="tls_background") }} "TLS background"
 [4]: http://www.cmbi.ru.nl/WHY_NOT2/resources/list/BDB_PRESENT "List of all BDB
 entries"
-[5]: {{ url_for("static", filename="bdb-0.6.5.zip") }} "Source"
+[5]: https://github.com/cmbi/bdb "bdb"
 [6]: http://www.wwpdb.org/remediation.html "PDB remediation"
 [7]: http://www.ccp4.ac.uk/html/tlsanl.html "TLSANL"
 [8]: http://www.ccp4.ac.uk/html/tlsanl.html#skttls "SKTTLS"
