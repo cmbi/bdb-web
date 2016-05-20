@@ -10,6 +10,10 @@ manually:
 * virtualenv
 * virtualenvwrapper
 
+## Settings
+
+Copy `settings.example` in the `config` directory to e.g.
+`config/bdb_web_settings.cfg` and modify it to your needs.
 
 ## Running in Docker:
 
