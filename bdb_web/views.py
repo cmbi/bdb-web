@@ -12,6 +12,8 @@ from bdb_web import app, bdb_data, b_plot, flat_pages, forms
 
 @app.route("/entry/<pdb_id>/")
 def bdb(pdb_id):
+    _log.info("handing request for entry {}".format(pdb_id))
+
     pdb_id = pdb_id.lower()
     return render_template(
         "bdb.html",
