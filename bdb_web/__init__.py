@@ -2,7 +2,7 @@ import logging
 from logging.handlers import RotatingFileHandler, SMTPHandler
 
 _log = logging.getLogger("bdb-web")
-log_file = "bdb-web.log"
+log_file = "/var/log/bdb-web.log"
 _file = RotatingFileHandler(log_file, "a", 524288, 5, "UTF-8")
 _log.addHandler(_file)
 _formatter = logging.Formatter(
