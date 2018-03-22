@@ -11,4 +11,4 @@ services:
       - BDB_WEB_SETTINGS=/usr/src/app/prd_settings.py
     volumes:
       - "/var/log:/var/log"
-      - "/mnt/cmbi4:/data"
+      - "/mnt/chelonium:/data"
