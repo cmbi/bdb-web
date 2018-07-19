@@ -44,7 +44,7 @@ Protein Engineering, Design and Selection (PEDS) 27 (11): 457-462.
 You can go to the download page of a single BDB entry by entering a PDB code in
 the search box. The entire databank can be downloaded via `rsync`:
 
-`rsync -avz rsync://rsync.cmbi.ru.nl/bdb/??/????/????.bdb my-bdb/`
+`rsync -avz rsync://rsync.cmbi.umcn.nl/bdb/??/????/????.bdb my-bdb/`
 
 A list of all BDB entries is available [here][4].
 
@@ -116,12 +116,12 @@ Wouter Touw &
 [1]: {{ url_for("pages", name="theory") }}  "Theory"
 [2]: http://dx.doi.org/10.1107/S0907444900014736 "Winn, Isupov & Murshudov"
 [3]: {{ url_for("pages", name="tls_background") }} "TLS background"
-[4]: http://www.cmbi.ru.nl/WHY_NOT2/resources/list/BDB_PRESENT "List of all BDB
+[4]: http://www.cmbi.umcn.nl/WHY_NOT2/resources/list/BDB_PRESENT "List of all BDB
 entries"
 [5]: https://github.com/cmbi/bdb "bdb"
 [6]: http://www.wwpdb.org/remediation.html "PDB remediation"
 [7]: http://www.ccp4.ac.uk/html/tlsanl.html "TLSANL"
 [8]: http://www.ccp4.ac.uk/html/tlsanl.html#skttls "SKTTLS"
 [9]: http://dx.doi.org/10.1107/S0907444910020421 "Zucker, Champ & Merritt"
-[10]: http://swift.cmbi.ru.nl/gv "Gert Vriend"
+[10]: http://swift.cmbi.umcn.nl/gv "Gert Vriend"
 [11]: http://dx.doi.org/10.1093/protein/gzu044 "BDB article"

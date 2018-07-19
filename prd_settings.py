@@ -8,4 +8,4 @@ MAIL_TO = ["Jon.Black@radboudumc.nl", "Coos.Baakman@radboudumc.nl"]
 BDB_ROOT = "/data/bdb"
 PDB_ROOT = "/data/pdb"
 PDB_SEARCH_URL = "http://www.rcsb.org/pdb/explore/explore.do?structureId="
-WHY_NOT_SEARCH_URL = "http://www.cmbi.ru.nl/WHY_NOT2/search/pdbid/"
+WHY_NOT_SEARCH_URL = "http://www.cmbi.umcn.nl/WHY_NOT2/search/pdbid/"

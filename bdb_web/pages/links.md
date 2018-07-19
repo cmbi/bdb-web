@@ -8,7 +8,7 @@ title: External links
 
 [RCSB PDB] [4]
 
-[1]: http://www.cmbi.ru.nl/WHY_NOT2/ "WHY NOT"
-[2]: http://swift.cmbi.ru.nl/gv/facilities/ "CMBI facilities"
+[1]: http://www.cmbi.umcn.nl/WHY_NOT2/ "WHY NOT"
+[2]: http://swift.cmbi.umcn.nl/gv/facilities/ "CMBI facilities"
 [3]: http://www.ebi.ac.uk/pdbe/ "PDBe"
 [4]: http://www.rcsb.org/ "RCSB PDB"
