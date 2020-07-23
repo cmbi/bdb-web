@@ -1,10 +1,10 @@
 # Flask settings for version 0.2.2
-BDB_ROOT = "bdb"
-MAIL_SERVER = "127.0.0.1"
+BDB_ROOT = "/mnt/chelonium/bdb"
+MAIL_SERVER = "smtp.umcn.nl"
 MAIL_SMTP_PORT = 25
-MAIL_FROM = "bdb-web_error@example.com"
-MAIL_TO = ["yourname@example.com"]
-PDB_ROOT = "pdb"
+MAIL_FROM = "bdb-web@cmbi.umcn.nl"
+MAIL_TO = ["coos.baakman@radboudumc.nl"]
+PDB_ROOT = "/mnt/chelonium/pdb"
 PDB_SEARCH_URL = "http://www.rcsb.org/pdb/explore/explore.do?structureId="
 SECRET_KEY = "dummy secret key"
 WHY_NOT_SEARCH_URL = "http://www.cmbi.ru.nl/WHY_NOT2/search/pdbid/"
