@@ -140,7 +140,7 @@ def pdb_path(pdb_id, pdb_root=app.config["PDB_ROOT"]):
 
 def prepare_metadata(dic):
     """Collapse all values of this dictionary to strings."""
-    for k, v in dic.iteritems():
+    for k, v in dic.items():
         try:
             if isinstance(v, (list, tuple)):
                 v = ", ".join(str(x) for x in v)

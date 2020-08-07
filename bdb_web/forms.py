@@ -2,7 +2,7 @@ from wtforms import TextField, validators
 from wtforms.validators import Regexp
 from flask_wtf import Form
 
-from bdb_data import PDB_ID_PAT
+from bdb_web.bdb_data import PDB_ID_PAT
 
 
 class SearchForm(Form):

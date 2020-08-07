@@ -3,7 +3,7 @@ from __future__ import division
 import logging
 _log = logging.getLogger("bdb-web")
 
-import StringIO
+from io import StringIO
 
 from flask import make_response
 
