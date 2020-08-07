@@ -3,7 +3,7 @@ from __future__ import division
 import logging
 _log = logging.getLogger("bdb-web")
 
-from io import StringIO
+from io import BytesIO
 
 from flask import make_response
 
@@ -113,7 +113,7 @@ def show(pdb_id, ca=True, norm=False):
 
     # Create a response
     canvas = FigureCanvas(fig)
-    output = StringIO.StringIO()
+    output = BytesIO()
     canvas.print_png(output)
     response = make_response(output.getvalue())
     response.mimetype = "image/png"
