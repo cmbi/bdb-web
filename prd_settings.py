@@ -6,6 +6,6 @@ MAIL_FROM = "bdb-web_error@example.com"
 MAIL_TO = ["Jon.Black@radboudumc.nl", "Coos.Baakman@radboudumc.nl"]
 
 BDB_ROOT = "/data/bdb"
-PDB_ROOT = "/data/pdb"
+PDB_ROOT = "/data/pdb/flat"
 PDB_SEARCH_URL = "http://www.rcsb.org/pdb/explore/explore.do?structureId="
 WHY_NOT_SEARCH_URL = "http://www.cmbi.umcn.nl/WHY_NOT2/search/pdbid/"
