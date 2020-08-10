@@ -1,9 +1,13 @@
 # Flask settings for version 0.2.2
+# BDB files in divided directory structure, e.g.
+# BDB_ROOT/cr/1crn/1crn.[json|bdb|log|whynot]
 BDB_ROOT = "/data/bdb"
 MAIL_SERVER = "smtp.umcn.nl"
 MAIL_SMTP_PORT = 25
 MAIL_FROM = "bdb-web@cmbi.umcn.nl"
 MAIL_TO = ["myname@example.nl"]
+# PDB files in flat directory structure, e.g.
+# PDB_ROOT/pdb1crn.ent.gz
 PDB_ROOT = "/data/pdb"
 PDB_SEARCH_URL = "http://www.rcsb.org/pdb/explore/explore.do?structureId="
 SECRET_KEY = "dummy secret key"

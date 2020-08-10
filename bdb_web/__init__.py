@@ -20,6 +20,8 @@ from flask_flatpages_pandoc import FlatPagesPandoc
 FLATPAGES_EXTENSION = ".md"
 FLATPAGES_MARKDOWN_EXTENSIONS = ["codehilite", "tables", "def_list",
                                  "footnotes", "admonition", "fenced_code"]
+MATHJAX_CDN = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+MATHJAX_ARG = "--mathjax={:s}".format(MATHJAX_CDN)
 
 app = Flask(__name__, static_folder="static")
 app.config.from_object(__name__)
@@ -52,7 +54,10 @@ else:
     _log.setLevel(logging.DEBUG)
 
 flat_pages = FlatPages(app)
-FlatPagesPandoc("markdown", app, ["--mathjax", "-s"], pre_render=True)
+from bdb_web.renderer import renderer
+FlatPagesPandoc.renderer = renderer
+FlatPagesPandoc("markdown", app, [MATHJAX_ARG, "-s", "--quiet"],
+                pre_render=True)
 
 
 import bdb_web.views

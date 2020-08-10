@@ -6,7 +6,7 @@ title: External links
 
 [PDBe][3]
 
-[RCSB PDB] [4]
+[RCSB PDB][4]
 
 [1]: http://www.cmbi.ru.nl/WHY_NOT2/ "WHY NOT"
 [2]: http://swift.cmbi.ru.nl/gv/facilities/ "CMBI facilities"

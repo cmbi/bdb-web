@@ -106,12 +106,12 @@ ANISOU 3296  O   GLY B 635     8207  10502   8350    -17    684   -734       O
 **<a name="fig2"></a>Figure 2** Gly 635 from [3zzw][7]. U~11~, U~12~, U~13~,
 U~12~, U~13~, and U~23~ are stored in the [ANISOU records][5] after the
 identifier columns. The last numeric column of the [ATOM records][2] is
-the equivalent B-factor, B~eq~, calculated from the six U~ij~ elements ([eq. 3]
-[9]) in the ANISOU records ([eq. 6][8]).
+the equivalent B-factor, B~eq~, calculated from the six U~ij~ elements
+([eq. 3][9]) in the ANISOU records ([eq. 6][8]).
 </br>
 </br>
 
-###<a name="occ"></a>Occupancy
+### Occupancy<a name="occ"></a>
 B-factors in PDB files commonly are seen as a measure of (local) mobility in
 the (macro)molecule. As mentioned above, this is only partly true.
 
@@ -158,19 +158,16 @@ to resolve close alternate positions instead of modeling the atoms with large
 B-factors.
 
 
-[1]: http://www.iucr.org/resources/commissions/crystallographic-nomenclature/adp
-     "Atomic displacement parameter nomenclature"
-[2]: http://www.wwpdb.org/documentation/format33/sect9.html#ATOM "ATOM records"
+[1]: http://www.iucr.org/resources/commissions/crystallographic-nomenclature/adp "Atomic displacement parameter nomenclature"
+[2]: http://www.wwpdb.org/documentation/file-format-content/format33/sect9.html#ATOM "ATOM records"
 [3]: #fig1 "Figure 1"
 [4]: http://www.rcsb.org/pdb/explore/explore.do?structureId=1crn "1crn"
-[5]: http://www.wwpdb.org/documentation/format33/sect9.html#ANISOU "ANISOU
-records"
+[5]: http://www.wwpdb.org/documentation/file-format-content/format33/sect9.html#ANISOU "ANISOU records"
 [6]: #fig2 "Figure 2"
 [7]: http://www.rcsb.org/pdb/explore/explore.do?structureId=3zzw "3zzw"
 [8]: #eq6 "Equation 6"
 [9]: #eq3 "Equation 3"
-[10]: http://www.wwpdb.org/documentation/format33/sect9.html "coordinate
-section"
+[10]: http://www.wwpdb.org/documentation/file-format-content/format33/sect9.html "coordinate section"
 [11]: #fig3 "Figure 3"
 [12]: http://www.rcsb.org/pdb/explore/explore.do?structureId=4jf1 "4jf1"
 [13]: #occ "Occupancy"
