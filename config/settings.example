@@ -1,4 +1,4 @@
-# Flask settings for version 0.2.2
+# Flask settings for version 0.3.0
 # BDB files in divided directory structure, e.g.
 # BDB_ROOT/cr/1crn/1crn.[json|bdb|log|whynot]
 BDB_ROOT = "/data/bdb"
