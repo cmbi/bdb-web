@@ -1,4 +1,5 @@
 import logging
+import os
 _log = logging.getLogger("bdb-web")
 
 
@@ -68,9 +69,14 @@ def bplot(pdb_id):
 @app.route("/download/<pdb_id>/")
 def download(pdb_id):
     pdb_id = pdb_id.lower()
+
+    directory_path = bdb_data.bdb_dir(pdb_id)
+    file_path = os.path.join(directory_path, pdb_id + ".bdb")
+
     try:
         return send_from_directory(
-            directory=bdb_data.bdb_dir(pdb_id),
+            directory=directory_path,
+            path=file_path,
             filename=pdb_id + ".bdb",
             mimetype="chemical/x-pdb",
             as_attachment=True,
